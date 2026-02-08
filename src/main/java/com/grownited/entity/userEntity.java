@@ -108,6 +108,4 @@ public class userEntity {
 		this.role = role;
 	}
 	
-	
-	
 }

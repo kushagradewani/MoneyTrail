@@ -18,6 +18,7 @@ public class UserDetailEntity {
 	private String city;
 	private String state;
 	private String country;
+	
 	public Integer getUserDetailId() {
 		return userDetailId;
 	}
@@ -54,7 +55,5 @@ public class UserDetailEntity {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
-	
 	
 }

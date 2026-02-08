@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.grownited.entity.UserDetailEntity;
 import com.grownited.entity.userEntity;
+import com.grownited.repository.UserDetailRepository;
 import com.grownited.repository.UserRepository;
 
 @Controller
@@ -16,6 +17,8 @@ public class SessionController {
 	
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	UserDetailRepository userDetailRepository;
 	
 	@GetMapping("/signup")
 	public String openSignUpPage() {
@@ -42,6 +45,7 @@ public class SessionController {
 		userEntity.setCreatedAt(LocalDate.now());
 		
 		userRepository.save(userEntity);
+		userDetailRepository.save(userDetailEntity);
 
 		return "Login";
 	}
