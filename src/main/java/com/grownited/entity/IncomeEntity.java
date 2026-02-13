@@ -6,8 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "income")
 public class IncomeEntity {
 	
 	@Id
@@ -20,7 +22,7 @@ public class IncomeEntity {
 	private String description;
 	private Boolean statusId;
 	private Float amount;
-	private Boolean status;
+	private Boolean active;
 	
 	public Integer getIncomeId() {
 		return incomeId;
@@ -70,12 +72,13 @@ public class IncomeEntity {
 	public void setAmount(Float amount) {
 		this.amount = amount;
 	}
-	public Boolean getStatus() {
-		return status;
+	public Boolean getActive() {
+		return active;
 	}
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
+	
 	
 	
 

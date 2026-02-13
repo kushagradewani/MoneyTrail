@@ -17,7 +17,7 @@ public class AccountEntity {
 	private Boolean exDefault;
 	private Float amount;
 	private Integer userId;
-	private Boolean status;
+	private Boolean active;
 	
 	public Integer getInaccountId() {
 		return inaccountId;
@@ -49,12 +49,13 @@ public class AccountEntity {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	public Boolean getStatus() {
-		return status;
+	public Boolean getActive() {
+		return active;
 	}
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
+	
 	
 	
 	

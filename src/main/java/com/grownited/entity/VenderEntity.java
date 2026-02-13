@@ -4,15 +4,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "vender")
 public class VenderEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer vendorId;
 	private String vendorName;
-	private Boolean status;
+	private Boolean active;
 	public Integer getVendorId() {
 		return vendorId;
 	}
@@ -25,12 +27,13 @@ public class VenderEntity {
 	public void setVendorName(String vendorName) {
 		this.vendorName = vendorName;
 	}
-	public Boolean getStatus() {
-		return status;
+	public Boolean getActive() {
+		return active;
 	}
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
+	
 	
 
 }

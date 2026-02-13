@@ -6,8 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "expense")
 public class ExpenseEntity {
 	
 	@Id
@@ -23,7 +25,7 @@ public class ExpenseEntity {
  	private LocalDate date;
 	private String description;
 	private Integer userId;
-	private Boolean status;
+	private Boolean active;
 	public Integer getExpenseId() {
 		return expenseId;
 	}
@@ -90,12 +92,13 @@ public class ExpenseEntity {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	public Boolean getStatus() {
-		return status;
+	public Boolean getActive() {
+		return active;
 	}
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
+	
 	
 	
 

@@ -4,15 +4,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "category")
 public class CategoryEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer categoryId;
 	private String categoryName;
-	private Boolean status;
+	private Boolean active;
 	
 	public Integer getCategoryId() {
 		return categoryId;
@@ -26,12 +28,13 @@ public class CategoryEntity {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	public Boolean getStatus() {
-		return status;
+	public Boolean getActive() {
+		return active;
 	}
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
+	
 	
 	
 

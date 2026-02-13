@@ -4,8 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "subCategory")
 public class SubCategoryEntity {
 	
 	@Id
@@ -13,7 +15,7 @@ public class SubCategoryEntity {
 	private Integer subCategoryId;
 	private String subCategoryName;
 	private Integer categoryId;
-	private Boolean status;
+	private Boolean active;
 	public Integer getSubCategoryId() {
 		return subCategoryId;
 	}
@@ -32,12 +34,13 @@ public class SubCategoryEntity {
 	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
-	public Boolean getStatus() {
-		return status;
+	public Boolean getActive() {
+		return active;
 	}
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
+	
 	
 	
 

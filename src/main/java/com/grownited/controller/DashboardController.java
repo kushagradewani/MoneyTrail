@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DashboardController {
 	
-	@GetMapping(value =  {"dashboard","/"})
+	@GetMapping(value =  {"adminDashboard","/"})
 	public String adminDashboard() {
-		return "Dashboard";
+		return "AdminDashboard";
 	}
 
 }
