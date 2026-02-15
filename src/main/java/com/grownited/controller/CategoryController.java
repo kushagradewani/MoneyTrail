@@ -26,31 +26,54 @@ public class CategoryController {
 		return "Category";
 	}
 	
-	@GetMapping(value = {"subCategory"})
-	public String subCategory() {
-		return "SubCategory";
-	}
-	
 	@PostMapping("saveCategory")
 	public String saveCategory(CategoryEntity categoryEntity) {
 		categoryEntity.setActive(true);
 		categoryRepository.save(categoryEntity); 
-		return "Vender";
+		return "redirect:/categoryList";
 	}
-	
-	@PostMapping("saveSubCategory")
-	public String saveCategory(SubCategoryEntity subCategoryEntity) {
-		subCategoryEntity.setActive(true);
-		subCategoryRepository.save(subCategoryEntity); 
-		return "Vender";
-	}
-	
-	@GetMapping("categoryList")
+	@GetMapping(value = {"categoryList"})
 	public String categoryList(Model model) {
 		List<CategoryEntity> categoryList = categoryRepository.findAll();
 		model.addAttribute("categoryList",categoryList);
-		
 		return "CategoryList";
 	}
+	@GetMapping("deleteCategory")
+	public String deleteCategory(Integer categoryId) {
+		categoryRepository.deleteById(categoryId);
+		
+		return "redirect:/categoryList";//do not open jsp , open another url -> listHackathon
+	}
+	
+	@GetMapping(value = {"subCategory"})
+	public String subCategory(Model model) {
+		List<CategoryEntity> allCategory = categoryRepository.findAll();
+		model.addAttribute("allCategory",allCategory);
+		return "SubCategory";
+	}	
+	
+	@PostMapping("saveSubCategory")
+	public String saveCategory(SubCategoryEntity subCategoryEntity,CategoryEntity categoryEntity) {
+		subCategoryEntity.setActive(true);
+		subCategoryEntity.setCategoryId(subCategoryEntity.getCategoryId());
+		subCategoryRepository.save(subCategoryEntity); 
+		return "redirect:/subCategoryList";
+	}
+	@GetMapping(value = {"subCategoryList"})
+	public String subCategoryList(Model model) {
+		List<CategoryEntity> categoryList = categoryRepository.findAll();
+		model.addAttribute("categoryList",categoryList);
+		List<SubCategoryEntity> subCategoryList = subCategoryRepository.findAll();
+		model.addAttribute("subCategoryList",subCategoryList);
+		return "SubCategoryList";
+	}
+	@GetMapping("deleteSubCategory")
+	public String deleteSubCategory(Integer subCategoryId) {
+		subCategoryRepository.deleteById(subCategoryId);
+		
+		return "redirect:/subCategoryList";//do not open jsp , open another url -> listHackathon
+	}
+	
+	
 	
 }

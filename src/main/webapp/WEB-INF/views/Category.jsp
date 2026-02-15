@@ -83,6 +83,10 @@
 			                    placeholder="Enter category name"
 			                    required>
 			            </div>
+			            
+			            <small class="text-muted fst-italic">
+					        Example: Food, Transport, Utilities, Shopping, Salary
+					    </small><br><br>
 			
 			            <!-- Submit Button -->
 			            <button type="submit" class="btn btn-primary">

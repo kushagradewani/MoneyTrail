@@ -12,26 +12,26 @@ public class VenderEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer vendorId;
-	private String vendorName;
+	private Integer venderId;
+	private String venderName;
 	private Boolean active;
-	public Integer getVendorId() {
-		return vendorId;
-	}
-	public void setVendorId(Integer vendorId) {
-		this.vendorId = vendorId;
-	}
-	public String getVendorName() {
-		return vendorName;
-	}
-	public void setVendorName(String vendorName) {
-		this.vendorName = vendorName;
-	}
 	public Boolean getActive() {
 		return active;
 	}
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+	public Integer getVenderId() {
+		return venderId;
+	}
+	public void setVenderId(Integer venderId) {
+		this.venderId = venderId;
+	}
+	public String getVenderName() {
+		return venderName;
+	}
+	public void setVenderName(String venderName) {
+		this.venderName = venderName;
 	}
 	
 	

@@ -7,7 +7,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Vender List</title>
+<title>Category List</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -92,8 +92,8 @@
 				<div class="bg-secondary rounded h-100 p-4">
 
 					<div class="d-flex justify-content-between align-items-center mb-4">
-						<h6 class="mb-0">All Vender</h6>
-						<a href="category" class="btn btn-sm btn-info">New</a>
+						<h6 class="mb-0">All Category</h6>
+						<a href="user" class="btn btn-sm btn-info">New</a>
 					</div>
 
 					<div class="table-responsive">
@@ -101,40 +101,47 @@
 							<thead>
 								<tr>
 									<th scope="col">#</th>
-									<th scope="col">Vender Name</th>
+									<th scope="col">First Name</th>
+									<th scope="col">Last Name</th>
+									<th scope="col">Email</th>
 									<th scope="col">Status</th>
 									<th scope="col">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 
-								<c:if test="${empty venderList}">
+								<c:if test="${empty userList}">
 									<tr>
 										<td colspan="4" class="text-center text-muted">No
-											Vender found</td>
+											User Not found</td>
 									</tr>
 								</c:if>
 
-								<c:forEach var="ven" items="${venderList}" varStatus="i">
+								<c:forEach var="ul" items="${userList}" varStatus="i">
 									<tr>
 										<th scope="row">${i.index + 1}</th>
-										<td>${ven.venderName}</td>
+										<td>${ul.firstName}</td>
+										<td>${ul.lastName}</td>
+										<td>${ul.email}</td>
 
 										<td><c:choose>
-												<c:when test="${ven.active}">
+												<c:when test="${ul.active}">
 													<span class="badge bg-success">Active</span>
 												</c:when>
 												<c:otherwise>
 													<span class="badge bg-danger">Inactive</span>
 												</c:otherwise>
-											</c:choose></td>
+											</c:choose>
+										</td>
 
-										<td><a href="editCategory?id=${ven.venderId}"
+										<td><a href="editCategory?id=${ul.userId}"
 											class="btn btn-sm btn-warning"> Edit </a> <a
-											href="deleteCategory?id=${ven.venderId}"
+											href="deleteCategory?id=${ul.userId}"
 											class="btn btn-sm btn-danger"
 											onclick="return confirm('Are you sure you want to delete this category?')">
 												Delete </a></td>
+										<td><a class="btn btn-secondary" href="viewUser?userId=${ul.userId}">View</a>
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>

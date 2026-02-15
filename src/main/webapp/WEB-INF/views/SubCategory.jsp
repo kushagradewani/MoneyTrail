@@ -61,38 +61,64 @@
 			    <div class="bg-secondary rounded h-100 p-4">
 			        <div class="d-flex justify-content-between align-items-center mb-4">
 					    <h6 class="mb-0">Add Sub Category</h6>
-					    <a href="categoryList" class="btn btn-sm btn-outline-light">
+					    <a href="subCategoryList" class="btn btn-sm btn-outline-light">
 					        View All Sub Categories
 					    </a>
 					</div>
 
 			
-			        <form action="saveCategory" method="post">
-			
-			            <!-- Hidden Category ID -->
-			            <input type="hidden" name="categoryId" value="">
-			
-			            <!-- Category Name -->
-			            <div class="mb-3">
-			                <label for="categoryName" class="form-label"> Sub Category Name</label>
-			                <input 
-			                    type="text" 
-			                    class="form-control" 
-			                    id="categoryName"
-			                    name="categoryName"
-			                    placeholder="Enter category name"
-			                    required>
-			            </div>
-			
-			            <!-- Submit Button -->
-			            <button type="submit" class="btn btn-primary">
-			                Save Sub Category
-			            </button>
-			            <a href="categoryList" class="btn btn-secondary">
-		                    Cancel
-		                </a>
-			
-			        </form>
+			        <form action="saveSubCategory" method="post">
+					
+					    <!-- Hidden SubCategory ID -->
+					    <input type="hidden" name="subCategoryId" value="">
+					
+					    <!-- Select Category Dropdown -->
+					    <div class="mb-3">
+					        <label for="categoryId" class="form-label">Select Category</label>
+					        <select 
+					            class="form-select" 
+					            id="categoryId"
+					            name="categoryId"
+					            required>
+					
+					            <option value="">-- Select Category --</option>
+					
+					            <c:forEach var="cat" items="${allCategory}">
+					                <option value="${cat.categoryId}">
+					                    ${cat.categoryName}
+					                </option>
+					            </c:forEach>
+					
+					        </select>
+					    </div>
+					
+					    <!-- Sub Category Name -->
+					    <div class="mb-3">
+					        <label for="subCategoryName" class="form-label">Sub Category Name</label>
+					        <input 
+					            type="text" 
+					            class="form-control" 
+					            id="subCategoryName"
+					            name="subCategoryName"
+					            placeholder="Enter sub category name"
+					            required>
+					    </div>
+					    
+					    <small class="text-muted fst-italic">
+					        Example: If Category is "Food", Subcategories can be "Fast Food", "Groceries", "Restaurant". / If Category is "Transport", Subcategories can be "Petrol", "Bus Fare", "Taxi".
+					    </small><br><br>
+					
+					    <!-- Submit Button -->
+					    <button type="submit" class="btn btn-primary">
+					        Save Sub Category
+					    </button>
+					
+					    <a href="subCategoryList" class="btn btn-secondary">
+					        Cancel
+					    </a>
+					
+					</form>
+
 			    </div>
 			</div>
             <!-- Footer Start -->
