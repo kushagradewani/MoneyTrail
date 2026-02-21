@@ -56,15 +56,15 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Expense</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="vender" class="dropdown-item">Add New Expense</a>
-                            <a href="typography.html" class="dropdown-item">View List Expense</a>
+                            <a href="expense" class="dropdown-item">Add New Expense</a>
+                            <a href="expenseList" class="dropdown-item">View List Expense</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Income</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="vender" class="dropdown-item">Add New Income</a>
-                            <a href="typography.html" class="dropdown-item">View List Income</a>
+                            <a href="income" class="dropdown-item">Add New Income</a>
+                            <a href="incomeList" class="dropdown-item">View List Income</a>
                         </div>
                     </div>
                     

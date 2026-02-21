@@ -18,9 +18,9 @@ public class IncomeEntity {
 	private String title;
 	private LocalDate date;
 	private Integer userId;
-	private Integer accountId;
+	private Integer inaccountId;
 	private String description;
-	private Boolean statusId;
+	private Integer statusId;
 	private Float amount;
 	private Boolean active;
 	
@@ -48,23 +48,11 @@ public class IncomeEntity {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	public Integer getAccountId() {
-		return accountId;
-	}
-	public void setAccountId(Integer accountId) {
-		this.accountId = accountId;
-	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public Boolean getStatusId() {
-		return statusId;
-	}
-	public void setStatusId(Boolean statusId) {
-		this.statusId = statusId;
 	}
 	public Float getAmount() {
 		return amount;
@@ -77,6 +65,18 @@ public class IncomeEntity {
 	}
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+	public Integer getInaccountId() {
+		return inaccountId;
+	}
+	public void setInaccountId(Integer inaccountId) {
+		this.inaccountId = inaccountId;
+	}
+	public Integer getStatusId() {
+		return statusId;
+	}
+	public void setStatusId(Integer statusId) {
+		this.statusId = statusId;
 	}
 	
 	

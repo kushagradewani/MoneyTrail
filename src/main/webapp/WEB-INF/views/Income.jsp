@@ -1,115 +1,183 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Add Income</title>
+    <meta charset="utf-8">
+    <title>Income</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <jsp:include page="CSS.jsp"></jsp:include>
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-
-<div class="container-fluid wrapper">
-
-    <!-- HEADER -->
-    <jsp:include page="Header.jsp"/>
-
-    <!-- BODY -->
-    <div class="row">
-
-        <!-- SIDEBAR -->
-        <jsp:include page="Sidebar.jsp"/>
-
-        <!-- RIGHT CONTENT -->
-        <div class="col-md-10">
-            <div class="glass p-4">
-
-                <!-- PAGE CONTENT GOES HERE -->
-                <h3 class="text-center mb-4">Add Income 💵</h3>
-
-				<div class="row justify-content-center">
-				    <div class="col-md-6">
-				        <form action="saveIncome" method="post">
-				
-				            <!-- Hidden Income ID (for auto-generated PK) -->
-				            <input type="hidden" name="incomeId" value="">
-				
-				            <!-- Title -->
-				            <div class="mb-3">
-				                <label>Title</label>
-				                <input type="text" class="form-control" name="title" placeholder="Income Title" required>
-				            </div>
-				
-				            <!-- Date -->
-				            <div class="mb-3">
-				                <label>Date</label>
-				                <input type="date" class="form-control" name="date" required>
-				            </div>
-				
-				            <!-- User (Hidden / Session) -->
-				            <input type="hidden" name="userId" value="${sessionScope.userId}">
-				
-				            <!-- Account -->
-				            <div class="mb-3">
-				                <label>Account</label>
-				                <select class="form-select" name="accountId" required>
-				                    <option value="">Select Account</option>
-				                    <option value="1">Cash</option>
-				                    <option value="2">Bank</option>
-				                    <option value="3">Credit Card</option>
-				                </select>
-				            </div>
-				
-				            <!-- Description -->
-				            <div class="mb-3">
-				                <label>Description</label>
-				                <textarea class="form-control" name="description" rows="3" placeholder="Enter description"></textarea>
-				            </div>
-				
-				            <!-- Status -->
-				            <div class="mb-3">
-				                <label>Status</label>
-				                <select class="form-select" name="statusId" required>
-				                    <option value="">Select Status</option>
-				                    <option value="1">Paid</option>
-				                    <option value="2">UnPaid</option>
-				                    <option value="3">Partial Paid</option>
-				                </select>
-				            </div>
-				
-				            <!-- Amount -->
-				            <div class="mb-3">
-				                <label>Amount</label>
-				                <input type="number" class="form-control" name="amount" step="0.01" placeholder="Enter amount" required>
-				            </div>
-				
-				            <!-- Save Button -->
-				            <button class="btn btn-custom w-100">Save Income</button>
-				
-				        </form>
-				    </div>
-				</div>
-                
-
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
             </div>
         </div>
+        <!-- Spinner End -->
 
+
+        <!-- SideBar Start -->
+        <jsp:include page="Sidebar.jsp"></jsp:include>
+        <!-- SideBar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <jsp:include page="Header.jsp"></jsp:include>  
+            <!-- Navbar End -->
+            
+            <div class="col-sm-12 col-xl-6 pt-4 px-4">
+			    <div class="bg-secondary rounded h-100 p-4">
+			        <div class="d-flex justify-content-between align-items-center mb-4">
+					    <h6 class="mb-0">Add Income</h6>
+					    <a href="incomeList" class="btn btn-sm btn-outline-light">
+					        View All Income
+					    </a>
+					</div>
+
+			
+			        <form action="saveIncome" method="post">
+							
+					<!-- Hidden Income ID -->
+					<input type="hidden" name="incomeId" value="">
+				
+					<!-- Title -->
+					<div class="mb-3">
+					    <label for="title" class="form-label">Title</label>
+					    <input 
+					        type="text" 
+					        class="form-control" 
+					        id="title"
+					        name="title"
+					        placeholder="Enter income title"
+					        required>
+					</div>
+				
+					<!-- Date -->
+					<div class="mb-3">
+					    <label for="date" class="form-label">Date</label>
+					    <input 
+					        type="date" 
+					        class="form-control" 
+					        id="date"
+					        name="date"
+					        required>
+					</div>
+				
+					<!-- User ID -->
+					<div class="mb-3">
+					    <label for="userId" class="form-label">User</label>
+					    <input 
+					        type="number" 
+					        class="form-control" 
+					        id="userId"
+					        name="userId"
+					        placeholder="Enter user id"
+					        required>
+					</div>
+				
+					<!-- Account -->
+					<div class="mb-3">
+					    <label class="form-label">Account</label>
+					    <select class="form-select" name="inaccountId" required>
+					        <option value="">Select Account</option>
+					        <c:forEach var="acc" items="${allAccount}">
+					            <option value="${acc.inaccountId}">
+					                ${acc.title}
+					            </option>
+					        </c:forEach>
+					    </select>
+					</div>
+				
+					<!-- Description -->
+					<div class="mb-3">
+					    <label for="description" class="form-label">Description</label>
+					    <input 
+					        type="text" 
+					        class="form-control" 
+					        id="description"
+					        name="description"
+					        placeholder="Enter description">
+					</div>
+				
+					<!-- Status -->
+					<div class="mb-3">
+					    <label class="form-label">Status</label>
+					    <select class="form-select" name="statusId" required>
+					        <option value="">Select Status</option>
+					        <c:forEach var="status" items="${allStatus}">
+					            <option value="${status.statusId}">
+					                ${status.status}
+					            </option>
+					        </c:forEach>
+					    </select>
+					</div>
+				
+					<!-- Amount -->
+					<div class="mb-3">
+					    <label for="amount" class="form-label">Amount</label>
+					    <input 
+					        type="number" 
+					        step="0.01"
+					        class="form-control" 
+					        id="amount"
+					        name="amount"
+					        placeholder="Enter amount"
+					        required>
+					</div>
+				
+					<!-- Submit Button -->
+					<button type="submit" class="btn btn-primary">
+					    Save Income
+					</button>
+					<a href="incomeList" class="btn btn-secondary">
+				        Cancel
+				    </a>
+				
+				</form>
+			    </div>
+			</div>
+            <!-- Footer Start -->
+            <jsp:include page="Footer.jsp"></jsp:include>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
-
-    <!-- FOOTER -->
-    <jsp:include page="Footer.jsp"/>
-
-</div>
-
 </body>
+
 </html>

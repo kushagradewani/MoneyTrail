@@ -133,8 +133,8 @@
 		                                    </c:choose>
 		                                </td>
 		                                <td>
-		                                    <a href="editAccount?id=${acc.accountId}" class="btn btn-sm btn-warning">Edit</a>
-		                                    <a href="deleteAccount?id=${acc.accountId}" class="btn btn-sm btn-danger"
+		                                    <a href="editAccount?id=${acc.inaccountId}" class="btn btn-sm btn-warning">Edit</a>
+		                                    <a href="deleteAccount?id=${acc.inaccountId}" class="btn btn-sm btn-danger"
 		                                       onclick="return confirm('Are you sure you want to delete this account?')">Delete</a>
 		                                </td>
 		                            </tr>

@@ -70,7 +70,7 @@
 			        <form action="saveAccount" method="post">
 					
 					    <!-- Hidden Account ID -->
-					    <input type="hidden" name="accountId" value="">
+					    <input type="hidden" name="inaccountId" value="">
 					
 					    <!-- Account Title -->
 					    <div class="mb-3">
@@ -84,15 +84,18 @@
 					            required>
 					    </div>
 					
-					    <!-- Is Default Account -->
-						<div class="mb-3">
-						    <label for="exDefault" class="form-label">Default Account</label>
-						    <select class="form-select" id="exDefault" name="exDefault" required>
-						        <option value="">Select Option</option>
-						        <option value="Yes">Yes</option>
-						        <option value="No">No</option>
-						    </select>
-						</div>
+						<!-- Is Default Account -->
+					    <div class="mb-3">
+					        <label for="exDefault" class="form-label">Default Account</label>
+					        <input 
+					            type="text" 
+					            class="form-control" 
+					            id="exDefault"
+					            name="exDefault"
+					            placeholder="Yes or No"
+					            required>
+					    </div>
+
 					
 					    <!-- Amount -->
 					    <div class="mb-3">

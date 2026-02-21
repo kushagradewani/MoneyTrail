@@ -18,8 +18,8 @@ public class ExpenseEntity {
 	private String title;
 	private Integer categoryId;
 	private Integer SubCategoryId;
-	private Integer vendorId;
-	private Integer accountId;
+	private Integer venderId;
+	private Integer inaccountId;
 	private Integer statusId;
 	private Float amount;
  	private LocalDate date;
@@ -50,17 +50,17 @@ public class ExpenseEntity {
 	public void setSubCategoryId(Integer subCategoryId) {
 		SubCategoryId = subCategoryId;
 	}
-	public Integer getVendorId() {
-		return vendorId;
+	public Integer getVenderId() {
+		return venderId;
 	}
-	public void setVendorId(Integer vendorId) {
-		this.vendorId = vendorId;
+	public void setVenderId(Integer venderId) {
+		this.venderId = venderId;
 	}
-	public Integer getAccountId() {
-		return accountId;
+	public Integer getInaccountId() {
+		return inaccountId;
 	}
-	public void setAccountId(Integer accountId) {
-		this.accountId = accountId;
+	public void setInaccountId(Integer inaccountId) {
+		this.inaccountId = inaccountId;
 	}
 	public Integer getStatusId() {
 		return statusId;
