@@ -53,7 +53,19 @@
             <!-- Navbar Start -->
             <jsp:include page="Header.jsp"></jsp:include>  
             <!-- Navbar End -->
-
+            
+            <!-- Welcome Message Start -->
+			<div class="container-fluid pt-4 px-4">
+			    <div class="bg-secondary rounded p-4">
+			        <div class="d-flex align-items-center justify-content-between">
+			            <div>
+			                <h4 class="mb-0">Welcome Back, ${sessionScope.user.firstName}</h4>
+			                <small class="text-muted">Here's what's happening with your dashboard today.</small>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			<!-- Welcome Message End -->
 
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">

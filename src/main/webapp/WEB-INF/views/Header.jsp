@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- Navbar Start -->
             <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
                 <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
@@ -75,7 +79,20 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+	                        <c:choose>
+							    <c:when test="${not empty sessionScope.user.profilePicURL}">
+							        <img class="rounded-circle me-lg-2"
+							             src="${pageContext.request.contextPath}/${sessionScope.user.profilePicURL}"
+							             alt="Profile"
+							             style="width: 40px; height: 40px;">
+							    </c:when>
+							    <c:otherwise>
+							        <img class="rounded-circle me-lg-2"
+							             src="${pageContext.request.contextPath}/img/user.jpg"
+							             alt="Profile"
+							             style="width: 40px; height: 40px;">
+							    </c:otherwise>
+							</c:choose>
                             <span class="d-none d-lg-inline-flex">Money Trail</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">

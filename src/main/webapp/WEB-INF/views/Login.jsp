@@ -1,135 +1,145 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Login</title>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-<style>
-html, body {
-    height: 100%;
-    overflow: hidden;
-}
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    margin: 0;
-}
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-.login-wrapper {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-}
-
-.login-card {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 30px;
-    width: 100%;
-    max-width: 420px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    color: #fff;
-}
-
-.login-card h3 {
-    text-align: center;
-    font-weight: 600;
-    margin-bottom: 25px;
-}
-
-.form-control {
-    background: rgba(255,255,255,0.2);
-    border: none;
-    border-radius: 12px;
-    color: #fff;
-    font-size: 14px;
-}
-
-.form-control::placeholder {
-    color: #e0e0e0;
-}
-
-.form-control:focus {
-    background: rgba(255,255,255,0.25);
-    box-shadow: none;
-    color: #fff;
-}
-
-label {
-    font-size: 13px;
-}
-
-.btn-custom {
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    border: none;
-    border-radius: 30px;
-    padding: 10px;
-    font-size: 15px;
-    width: 100%;
-}
-
-a {
-    color: #ffe6f0;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-@media (max-width: 576px) {
-    .login-card {
-        padding: 20px;
-    }
-}
-</style>
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-
-<div class="login-wrapper">
-    <div class="login-card">
-        <h3>Login ✨</h3>
-
-        <form action="LoginServlet" method="post">
-            <div class="mb-3">
-                <label>Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Enter email" required>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
             </div>
+        </div>
+        <!-- Spinner End -->
 
-            <div class="mb-3">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Enter password" required>
-            </div>
-            
-            <div class="text-center mt-3">
-                <small>
-                    <a href="forgetpassword">Forgot Password</a>
-                </small>
-            </div>
 
-            <button type="submit" class="btn btn-custom text-white mt-3">Login</button>
-
-            <div class="text-center mt-3">
-                <small>
-                    Don’t have an account? <a href="signup">Sign Up</a>
-                </small>
-            </div>
-        </form>
+        <!-- Sign In Start -->
+		<div class="container-fluid">
+		    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+		        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+		            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+		
+		                <div class="d-flex align-items-center justify-content-between mb-3">
+		                    <a href="#" class="">
+		                        <h3 class="text-primary">
+		                            <i class="fa fa-user-edit me-2"></i>ExpenseManager
+		                        </h3>
+		                    </a>
+		                    <h3>Sign In</h3>
+		                </div>
+		
+		                <!-- FORM START -->
+		                <form action="authenticate" method="post">
+		
+		                    <!-- Email -->
+		                    <div class="form-floating mb-3">
+		                        <input type="email"
+		                               class="form-control"
+		                               id="email"
+		                               name="email"
+		                               placeholder="name@example.com"
+		                               required>
+		                        <label for="email">Email address</label>
+		                    </div>
+		
+		                    <!-- Password -->
+		                    <div class="form-floating mb-4">
+		                        <input type="password"
+		                               class="form-control"
+		                               id="password"
+		                               name="password"
+		                               placeholder="Password"
+		                               required>
+		                        <label for="password">Password</label>
+		                    </div>
+		
+		                    <!-- Remember + Forgot -->
+		                    <div class="d-flex align-items-center justify-content-between mb-4">
+		                        <div class="form-check">
+		                            <input type="checkbox"
+		                                   class="form-check-input"
+		                                   id="rememberMe"
+		                                   name="rememberMe">
+		                            <label class="form-check-label" for="rememberMe">
+		                                Remember Me
+		                            </label>
+		                        </div>
+		                        <a href="forgetpassword">Forgot Password?</a>
+		                    </div>
+		
+		                    <!-- Submit Button -->
+		                    <button type="submit" class="btn btn-primary py-3 w-100 mb-3">
+		                        Sign In
+		                    </button>
+		
+		                    <!-- Error Message -->
+		                    <div class="text-center text-danger mb-3">
+		                        ${error}
+		                    </div>
+		
+		                    <!-- Signup Link -->
+		                    <p class="text-center mb-0">
+		                        Don't have an Account?
+		                        <a href="signup">Sign Up</a>
+		                    </p>
+		
+		                </form>
+		                <!-- FORM END -->
+		
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		<!-- Sign In End -->
     </div>
-</div>
 
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/chart/chart.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
 </body>
+
+
 </html>

@@ -1,219 +1,182 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>User Registration</title>
+    <meta charset="utf-8">
+    <title>Create Account</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-    <style>
-        html, body {
-            height: 100%;
-            overflow-y: auto;
-        }
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            margin: 0;
-        }
-
-        .login-wrapper {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-        }
-
-        .login-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 30px;
-            width: 100%;
-            max-width: 520px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-            color: #fff;
-        }
-
-        .login-card h3 {
-            text-align: center;
-            font-weight: 600;
-            margin-bottom: 25px;
-        }
-
-        .form-control {
-            background: rgba(255,255,255,0.2);
-            border: none;
-            border-radius: 12px;
-            color: #fff;
-            font-size: 14px;
-        }
-
-        .form-control::placeholder {
-            color: #e0e0e0;
-        }
-
-        .form-control:focus {
-            background: rgba(255,255,255,0.25);
-            box-shadow: none;
-            color: #fff;
-        }
-
-        label {
-            font-size: 13px;
-            margin-bottom: 4px;
-        }
-
-        .btn-custom {
-            background: linear-gradient(135deg, #ff758c, #ff7eb3);
-            border: none;
-            border-radius: 30px;
-            padding: 10px;
-            font-size: 15px;
-            width: 100%;
-            color: #fff;
-            font-weight: 500;
-        }
-
-        .form-check-label {
-            font-size: 13px;
-        }
-
-        a {
-            color: #ffe6f0;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 576px) {
-            .login-card {
-                padding: 20px;
-            }
-        }
-    </style>
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
+    <div class="container-fluid position-relative d-flex p-0">
+	
+	    <!-- Spinner Start -->
+	    <div id="spinner"
+	         class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+	        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+	            <span class="sr-only">Loading...</span>
+	        </div>
+	    </div>
+	    <!-- Spinner End -->
+	
+	    <!-- Sign Up Start -->
+	    <div class="container-fluid">
+	        <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+	            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+	                <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+	
+	                    <div class="d-flex align-items-center justify-content-between mb-4">
+	                        <h3 class="text-primary">
+	                            <i class="fa fa-user-plus me-2"></i>ExpenseManager
+	                        </h3>
+	                        <h4>Create Account</h4>
+	                    </div>
+	
+	                    <form action="register" method="post" enctype="multipart/form-data">
+	
+	                        <!-- First & Last Name -->
+	                        <div class="row">
+							    <div class="col-md-6 mb-3">
+							        <div class="form-floating">
+							            <input type="text"
+							                   class="form-control"
+							                   id="firstName"
+							                   name="firstName"
+							                   placeholder="First Name"
+							                   required>
+							            <label for="firstName">First Name</label>
+							        </div>
+							    </div>
+							
+							    <div class="col-md-6 mb-3">
+							        <div class="form-floating">
+							            <input type="text"
+							                   class="form-control"
+							                   id="lastName"
+							                   name="lastName"
+							                   placeholder="Last Name"
+							                   required>
+							            <label for="lastName">Last Name</label>
+							        </div>
+							    </div>
+							</div>
+	
+	                        <!-- Email -->
+	                        <div class="form-floating mb-3">
+	                            <input type="email" class="form-control" name="email"
+	                                   placeholder="Email" required>
+	                            <label>Email Address</label>
+	                        </div>
+	
+	                        <!-- Password -->
+	                        <div class="form-floating mb-3">
+	                            <input type="password" class="form-control" name="password"
+	                                   placeholder="Password" required>
+	                            <label>Password</label>
+	                        </div>
+	
+	                        <!-- Gender -->
+	                        <div class="mb-3">
+	                            <label class="form-label d-block">Gender</label>
+	                            <div class="form-check form-check-inline">
+	                                <input class="form-check-input" type="radio" name="gender"
+	                                       value="MALE" required>
+	                                <label class="form-check-label">Male</label>
+	                            </div>
+	                            <div class="form-check form-check-inline">
+	                                <input class="form-check-input" type="radio" name="gender"
+	                                       value="FEMALE">
+	                                <label class="form-check-label">Female</label>
+	                            </div>
+	                            <div class="form-check form-check-inline">
+	                                <input class="form-check-input" type="radio" name="gender"
+	                                       value="OTHER">
+	                                <label class="form-check-label">Other</label>
+	                            </div>
+	                        </div>
+	
+	                        <!-- Birth Year -->
+	                        <div class="form-floating mb-3">
+	                            <input type="number" class="form-control" name="birthYear"
+	                                   placeholder="Birth Year" min="1900" max="2100" required>
+	                            <label>Birth Year</label>
+	                        </div>
+	
+	                        <!-- Contact -->
+	                        <div class="form-floating mb-3">
+	                            <input type="text" class="form-control" name="contactNum"
+	                                   placeholder="Phone Number" required>
+	                            <label>Contact Number</label>
+	                        </div>
+	
+	                        <!-- Profile Picture -->
+	                        <div class="mb-4">
+	                            <label class="form-label">Profile Picture</label>
+	                            <input type="file" name="profilePicURL" class="form-control">
+	                        </div>
+	
+	                        <!-- Button -->
+	                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">
+	                            Sign Up
+	                        </button>
+	
+	                        <p class="text-center mb-0">
+	                            Already have an Account?
+	                            <a href="login">Sign In</a>
+	                        </p>
+	
+	                    </form>
+	
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <!-- Sign Up End -->
+	
+	</div>
 
-<div class="login-wrapper">
-    <div class="login-card">
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/chart/chart.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-        <h3>Create Account ✨</h3>
-
-        <form action="register" method="post">
-
-            <!-- Name -->
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label>First Name</label>
-                    <input type="text" name="firstName" class="form-control" placeholder="First Name" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label>Last Name</label>
-                    <input type="text" name="lastName" class="form-control" placeholder="Last Name" required>
-                </div>
-            </div>
-
-            <!-- Email -->
-            <div class="mb-3">
-                <label>Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Email" required>
-            </div>
-
-            <!-- Password -->
-            <div class="mb-3">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Password" required>
-            </div>
-
-            <!-- Gender -->
-            <div class="mb-3">
-                <label class="d-block">Gender</label>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" value="MALE" required>
-                    <label class="form-check-label">Male</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" value="FEMALE">
-                    <label class="form-check-label">Female</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" value="OTHER">
-                    <label class="form-check-label">Other</label>
-                </div>
-            </div>
-
-            <!-- Birth Year -->
-            <div class="mb-3">
-                <label>Birth Year</label>
-                <input type="number" name="birthYear" class="form-control" placeholder="Birth Year"
-                       min="1900" max="2100" required>
-            </div>
-
-            <!-- Contact -->
-            <div class="mb-3">
-                <label>Contact Number</label>
-                <input type="text" name="contactNum" class="form-control" placeholder="Phone Number" required>
-            </div>
-
-            <!-- Profile Pic -->
-            <div class="mb-4">
-                <label>Profile Picture</label>
-                <input type="file" name="profilePicURL" class="form-control">
-            </div>
-            
-            <!-- Qualification -->
-            <div class="mb-3">
-                <label>Qualification</label>
-                <input type="text" name="qualification" class="form-control" placeholder="e.g. BSc IT, MCA">
-            </div>
-            
-            <!-- Location -->
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <label>City</label>
-                    <input type="text" name="city" class="form-control" placeholder="City">
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label>State</label>
-                    <input type="text" name="state" class="form-control" placeholder="State">
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label>Country</label>
-                    <input type="text" name="country" class="form-control" placeholder="Country">
-                </div>
-            </div>
-
-            <!-- Button -->
-            <div class="d-grid mt-4">
-                <button type="submit" class="btn btn-custom">
-                    Sign Up
-                </button>
-            </div>
-
-            <div class="text-center mt-3">
-                <small>
-                    Already have an account? <a href="login">Login</a>
-                </small>
-            </div>
-
-        </form>
-
-    </div>
-</div>
-
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
 </body>
+
+
 </html>

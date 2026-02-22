@@ -1,14 +1,18 @@
 package com.grownited.controller;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.grownited.entity.userEntity;
 import com.grownited.repository.UserRepository;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class SessionController {
@@ -24,6 +28,30 @@ public class SessionController {
 	@GetMapping("/login")
 	public String openLoginPage() {
 		return "Login";
+	}
+	
+	@PostMapping("/authenticate")
+	public String authenticate(String email,String password,Model model,HttpSession session) {
+		Optional<userEntity> op = userRepository.findByEmail(email);
+		
+		if(op.isPresent()) {
+			userEntity dbUser = op.get();
+			session.setAttribute("user", dbUser);
+			if(dbUser.getPassword().equals(password)) {
+				if(dbUser.getRole().equals("ADMIN")) {
+					return "redirect:/adminDashboard";
+				}
+				else if(dbUser.getRole().equals("USER")) {
+					return "redirect:/user-dashboard";
+				}
+				else {
+					return "Login";
+				}
+			}
+		}
+		
+		model.addAttribute("error", "Invalid Credentials");
+		return"Login";
 	}
 	
 	@GetMapping("/forgetpassword")
