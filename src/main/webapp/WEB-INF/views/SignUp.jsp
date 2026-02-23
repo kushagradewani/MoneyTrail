@@ -140,7 +140,7 @@
 	                        <!-- Profile Picture -->
 	                        <div class="mb-4">
 	                            <label class="form-label">Profile Picture</label>
-	                            <input type="file" name="profilePicURL" class="form-control">
+	                            <input type="file" name="profilePic" class="form-control">
 	                        </div>
 	
 	                        <!-- Button -->

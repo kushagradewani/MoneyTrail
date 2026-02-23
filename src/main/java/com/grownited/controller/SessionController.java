@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.grownited.entity.userEntity;
 import com.grownited.repository.UserRepository;
+import com.grownited.service.MailService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -19,6 +20,9 @@ public class SessionController {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	MailService mailService;
 	
 	@GetMapping("/signup")
 	public String openSignUpPage() {
@@ -66,7 +70,16 @@ public class SessionController {
 		userEntity.setCreatedAt(LocalDate.now());
 		
 		userRepository.save(userEntity);
+		
+		//Welcome mail Sender
+		mailService.sendWelcomeMail(userEntity);
 
+		return "Login";
+	}
+	
+	@GetMapping("/logout")
+	public String logoyut(HttpSession session) {
+		session.invalidate();
 		return "Login";
 	}
 }
