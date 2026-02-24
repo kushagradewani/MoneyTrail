@@ -1,5 +1,6 @@
 package com.grownited.controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -8,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.grownited.entity.userEntity;
 import com.grownited.repository.UserRepository;
 import com.grownited.service.MailService;
+import com.grownited.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -23,6 +26,9 @@ public class SessionController {
 	
 	@Autowired
 	MailService mailService;
+	
+	@Autowired
+	UserService userService;
 	
 	@GetMapping("/signup")
 	public String openSignUpPage() {
@@ -63,9 +69,58 @@ public class SessionController {
 		return "ForgetPassword";
 	}
 	
+	@PostMapping("/sendOtp")
+	public String sendOtp(@RequestParam String email) {
+	    userService.generateAndSendOtp(email);
+	    return "ForgetPassword";
+	}
+	
+	@PostMapping("/ResetPassword")
+	public String verifyOtp(@RequestParam String email,
+	                        @RequestParam String otp,
+	                        Model model) {
+
+	    if (userService.verifyOtp(email, otp)) {
+	        model.addAttribute("email", email);
+	        return "ResetPassword";
+	    }
+
+	    return "ForgetPassword";
+	}
+	
+	@PostMapping("/change-password")
+	public String changePassword(@RequestParam String email,
+	                             @RequestParam String newPassword) {
+
+	    Optional<userEntity> optional = userRepository.findByEmail(email);
+
+	    if (optional.isPresent()) {
+	        userEntity user = optional.get();
+	        user.setPassword(newPassword);
+	        userRepository.save(user);
+
+	        mailService.sendPasswordSuccessMail(user); // send after change
+	    }
+
+	    return "Login";
+	}
+	
+	@PostMapping("/resetPassword")
+	public String resetPassword(@RequestParam String email,
+	                            @RequestParam String newPassword,
+	                            @RequestParam String confirmPassword) {
+
+	    if (newPassword.equals(confirmPassword)) {
+	        userService.resetPassword(email, newPassword);
+	        return "login";
+	    }
+
+	    return "ResetPassword";
+	}
+	
 	@PostMapping("/register")
-	public String register(userEntity userEntity) {		
-		userEntity.setRole("Customer");
+	public String register(userEntity userEntity) throws IOException {		
+		userEntity.setRole("USER");
 		userEntity.setActive(true);
 		userEntity.setCreatedAt(LocalDate.now());
 		

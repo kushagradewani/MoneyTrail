@@ -1,6 +1,7 @@
 package com.grownited.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +27,7 @@ public class userEntity {
 	private String contactNum; 
 	private String profilePicURL;
 	private String otp;
+    private LocalDateTime otpGeneratedTime;
 	private Boolean active;
 	
 	public String getGender() {
@@ -107,5 +109,12 @@ public class userEntity {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	public LocalDateTime getOtpGeneratedTime() {
+		return otpGeneratedTime;
+	}
+	public void setOtpGeneratedTime(LocalDateTime otpGeneratedTime) {
+		this.otpGeneratedTime = otpGeneratedTime;
+	}
+	
 	
 }
