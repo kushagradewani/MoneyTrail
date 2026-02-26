@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,9 @@ public class SessionController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	@GetMapping("/signup")
 	public String openSignUpPage() {
@@ -88,7 +92,7 @@ public class SessionController {
 	    return "ForgetPassword";
 	}
 	
-	@PostMapping("/change-password")
+	@PostMapping("/changePassword")
 	public String changePassword(@RequestParam String email,
 	                             @RequestParam String newPassword) {
 
@@ -123,6 +127,10 @@ public class SessionController {
 		userEntity.setRole("USER");
 		userEntity.setActive(true);
 		userEntity.setCreatedAt(LocalDate.now());
+		
+		//Encode Password
+		String encodedPasswordString = passwordEncoder.encode(userEntity.getPassword());
+		userEntity.setPassword(encodedPasswordString);
 		
 		userRepository.save(userEntity);
 		
