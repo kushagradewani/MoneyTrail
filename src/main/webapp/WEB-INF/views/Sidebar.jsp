@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
@@ -6,12 +11,38 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        <c:choose>
+						    <c:when test="${not empty sessionScope.user.profilePicURL}">
+						        <img class="rounded-circle me-lg-2"
+						             src="${sessionScope.user.profilePicURL}"
+						             alt="Profile"
+						             style="width: 40px; height: 40px;">
+						    </c:when>
+						    <c:otherwise>
+						        <img class="rounded-circle me-lg-2"
+						             src="${pageContext.request.contextPath}/img/user.jpg"
+						             alt="Profile"
+						             style="width: 40px; height: 40px;">
+						    </c:otherwise>
+						</c:choose>
+
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Money Trail</h6>
-                        <span>Admin</span>
+                        <c:choose>
+						    <c:when test="${not empty sessionScope.user}">
+						        <h6 class="mb-0">
+						            ${sessionScope.user.firstName} 
+						            ${sessionScope.user.lastName}
+						        </h6>
+						        <span>${sessionScope.user.role}</span>
+						    </c:when>
+						
+						    <c:otherwise>
+						        <h6 class="mb-0">Guest User</h6>
+						        <span>Visitor</span>
+						    </c:otherwise>
+						</c:choose>
+
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
@@ -71,8 +102,8 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.html" class="dropdown-item">Sign In</a>
-                            <a href="signup.html" class="dropdown-item">Sign Up</a>
+                            <a href="login" class="dropdown-item">Sign In</a>
+                            <a href="signup" class="dropdown-item">Sign Up</a>
                             <a href="404.html" class="dropdown-item">404 Error</a>
                             <a href="blank.html" class="dropdown-item">Blank Page</a>
                         </div>

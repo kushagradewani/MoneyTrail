@@ -82,7 +82,7 @@
 	                        <c:choose>
 							    <c:when test="${not empty sessionScope.user.profilePicURL}">
 							        <img class="rounded-circle me-lg-2"
-							             src="${pageContext.request.contextPath}/${sessionScope.user.profilePicURL}"
+							             src="${sessionScope.user.profilePicURL}"
 							             alt="Profile"
 							             style="width: 40px; height: 40px;">
 							    </c:when>
@@ -93,7 +93,19 @@
 							             style="width: 40px; height: 40px;">
 							    </c:otherwise>
 							</c:choose>
-                            <span class="d-none d-lg-inline-flex">Money Trail</span>
+
+                            <c:choose>
+							    <c:when test="${not empty sessionScope.user}">
+							        <span class="mb-0">
+							            ${sessionScope.user.firstName}
+							        </span>
+							    </c:when>
+							
+							    <c:otherwise>
+							        <span class="mb-0">Guest User</span>
+							    </c:otherwise>
+							</c:choose>
+
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>

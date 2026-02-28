@@ -2,6 +2,7 @@ package com.grownited.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.cloudinary.Cloudinary;
 import com.grownited.entity.userEntity;
 import com.grownited.repository.UserRepository;
 import com.grownited.service.MailService;
@@ -34,6 +37,9 @@ public class SessionController {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	Cloudinary cloudinary;
+	
 	@GetMapping("/signup")
 	public String openSignUpPage() {
 		return "SignUp"; //jsp name
@@ -45,28 +51,35 @@ public class SessionController {
 	}
 	
 	@PostMapping("/authenticate")
-	public String authenticate(String email,String password,Model model,HttpSession session) {
-		Optional<userEntity> op = userRepository.findByEmail(email);
-		
-		if(op.isPresent()) {
-			userEntity dbUser = op.get();
-			session.setAttribute("user", dbUser);
-			if(dbUser.getPassword().equals(password)) {
-				if(dbUser.getRole().equals("ADMIN")) {
-					return "redirect:/adminDashboard";
-				}
-				else if(dbUser.getRole().equals("USER")) {
-					return "redirect:/user-dashboard";
-				}
-				else {
-					return "Login";
-				}
-			}
-		}
-		
-		model.addAttribute("error", "Invalid Credentials");
-		return"Login";
+	public String authenticate(String email,
+	                           String password,
+	                           Model model,
+	                           HttpSession session) {
+
+	    Optional<userEntity> op = userRepository.findByEmail(email);
+
+	    if (op.isPresent()) {
+
+	        userEntity dbUser = op.get();
+
+	        // 🔐 Check encrypted password correctly
+	        if (passwordEncoder.matches(password, dbUser.getPassword())) {
+
+	            session.setAttribute("user", dbUser);
+
+	            if (dbUser.getRole().equals("ADMIN")) {
+	                return "redirect:/adminDashboard";
+	            }
+	            else if (dbUser.getRole().equals("USER")) {
+	                return "redirect:/user-dashboard";
+	            }
+	        }
+	    }
+
+	    model.addAttribute("error", "Invalid Credentials");
+	    return "Login";
 	}
+
 	
 	@GetMapping("/forgetpassword")
 	public String openForgetPassword() {
@@ -79,51 +92,74 @@ public class SessionController {
 	    return "ForgetPassword";
 	}
 	
-	@PostMapping("/ResetPassword")
-	public String verifyOtp(@RequestParam String email,
-	                        @RequestParam String otp,
-	                        Model model) {
+	// ================= CHANGE PASSWORD =================
+    @PostMapping("/changePassword")
+    public String changePassword(@RequestParam String email,
+                                 @RequestParam String newPassword) {
 
-	    if (userService.verifyOtp(email, otp)) {
-	        model.addAttribute("email", email);
-	        return "ResetPassword";
-	    }
+        Optional<userEntity> optional = userRepository.findByEmail(email);
 
-	    return "ForgetPassword";
-	}
-	
-	@PostMapping("/changePassword")
-	public String changePassword(@RequestParam String email,
-	                             @RequestParam String newPassword) {
+        if (optional.isPresent()) {
+            userEntity user = optional.get();
 
-	    Optional<userEntity> optional = userRepository.findByEmail(email);
+            // Encrypt password
+            String encodedPassword = passwordEncoder.encode(newPassword);
+            user.setPassword(encodedPassword);
 
-	    if (optional.isPresent()) {
-	        userEntity user = optional.get();
-	        user.setPassword(newPassword);
-	        userRepository.save(user);
+            userRepository.save(user);
 
-	        mailService.sendPasswordSuccessMail(user); // send after change
-	    }
+            mailService.sendPasswordSuccessMail(user);
+        }
 
-	    return "Login";
-	}
-	
-	@PostMapping("/resetPassword")
-	public String resetPassword(@RequestParam String email,
-	                            @RequestParam String newPassword,
-	                            @RequestParam String confirmPassword) {
+        return "Login";
+    }
 
-	    if (newPassword.equals(confirmPassword)) {
-	        userService.resetPassword(email, newPassword);
-	        return "login";
-	    }
 
-	    return "ResetPassword";
-	}
+    // ================= VERIFY OTP =================
+    @PostMapping("/ResetPassword")
+    public String verifyOtp(@RequestParam String email,
+                            @RequestParam String otp,
+                            Model model) {
+
+        if (userService.verifyOtp(email, otp)) {
+            model.addAttribute("email", email);
+            return "ResetPassword";
+        }
+
+        return "ForgetPassword";
+    }
+
+
+    // ================= RESET PASSWORD =================
+    @PostMapping("/resetPassword")
+    public String resetPassword(@RequestParam String email,
+                                @RequestParam String newPassword,
+                                @RequestParam String confirmPassword,
+                                Model model) {
+
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("error", "Passwords do not match");
+            model.addAttribute("email", email);
+            return "ResetPassword";
+        }
+
+        Optional<userEntity> optional = userRepository.findByEmail(email);
+
+        if (optional.isPresent()) {
+            userEntity user = optional.get();
+
+            // Encrypt password before saving
+            String encodedPassword = passwordEncoder.encode(newPassword);
+            user.setPassword(encodedPassword);
+
+            userRepository.save(user);
+        }
+
+        return "login";
+    }
 	
 	@PostMapping("/register")
-	public String register(userEntity userEntity) throws IOException {		
+	public String register(userEntity userEntity,MultipartFile profilePic) throws IOException {		
 		userEntity.setRole("USER");
 		userEntity.setActive(true);
 		userEntity.setCreatedAt(LocalDate.now());
@@ -131,6 +167,17 @@ public class SessionController {
 		//Encode Password
 		String encodedPasswordString = passwordEncoder.encode(userEntity.getPassword());
 		userEntity.setPassword(encodedPasswordString);
+		
+		try {
+			Map  map = 	cloudinary.uploader().upload(profilePic.getBytes(), null);
+			String profilePicURL = map.get("secure_url").toString();
+			System.out.println(profilePicURL);
+			userEntity.setProfilePicURL(profilePicURL);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		userRepository.save(userEntity);
 		

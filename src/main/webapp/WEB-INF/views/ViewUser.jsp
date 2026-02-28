@@ -65,15 +65,19 @@
 		
 		            <div class="row">
 		            	<!-- Profile Picture -->
-					    <c:choose>
-	                        <c:when test="${not empty user.profilePicURL}">
-	                            <img src="${user.profilePicURL}" class="profile-pic">
-	                        </c:when>
-	                        <c:otherwise>
-	                            <img src="https://via.placeholder.com/120"
-	                                 class="profile-pic">
-	                        </c:otherwise>
-	                    </c:choose>
+						<c:choose>
+						    <c:when test="${not empty user.profilePicURL}">
+						        <img src="${user.profilePicURL}"
+						             class="rounded-circle img-thumbnail"
+						             style="width:150px; height:150px; object-fit:cover;">
+						    </c:when>
+						    <c:otherwise>
+						        <img src="${pageContext.request.contextPath}/img/user.jpg"
+						             class="rounded-circle img-thumbnail"
+						             style="width:150px; height:150px; object-fit:cover;">
+						    </c:otherwise>
+						</c:choose>
+
 		
 		                <!-- LEFT SIDE (Role Badge Only) -->
 		                <div class="col-md-3">
