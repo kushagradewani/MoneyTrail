@@ -134,13 +134,17 @@
 											</c:choose>
 										</td>
 
-										<td><a href="editCategory?id=${ul.userId}"
-											class="btn btn-sm btn-warning"> Edit </a> <a
-											href="deleteCategory?id=${ul.userId}"
-											class="btn btn-sm btn-danger"
-											onclick="return confirm('Are you sure you want to delete this category?')">
-												Delete </a></td>
-										<td><a class="btn btn-secondary" href="viewUser?userId=${ul.userId}">View</a>
+										<td>
+										    <a href="editUser?userId=${ul.userId}" class="btn btn-sm btn-warning">Edit</a>
+										
+										    <a href="deleteUser?userId=${ul.userId}"
+										       class="btn btn-sm btn-danger"
+										       onclick="return confirm('Are you sure you want to delete this user?')">
+										       Delete
+										    </a>
+										</td>
+										<td>										
+										    <a class="btn btn-secondary" href="viewUser?userId=${ul.userId}">View</a>
 										</td>
 									</tr>
 								</c:forEach>

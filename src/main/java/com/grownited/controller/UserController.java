@@ -57,5 +57,25 @@ public class UserController {
 		}
 
 	}
+	
+	// ------------------ EDIT USER ------------------
+	@GetMapping("editUser")
+	public String editUser(Integer userId, Model model) {
+	    Optional<userEntity> opUser = userRepository.findById(userId);
+
+	    if (opUser.isPresent()) {
+	        model.addAttribute("user", opUser.get());
+	        return "EditUser";
+	    } else {
+	        return "redirect:/userList";
+	    }
+	}
+
+    // ------------------ DELETE USER ------------------
+    @GetMapping("deleteUser")
+    public String deleteUser(Integer userId) {
+        userRepository.deleteById(userId);
+        return "redirect:/userList";
+    }
 
 }
