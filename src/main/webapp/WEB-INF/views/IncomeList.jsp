@@ -58,9 +58,9 @@
 					        <tr>
 					            <th>#</th>
 					            <th>Title</th>
-					            <th>User</th>
+					            <!-- <th>User</th>
 					            <th>Account</th>
-					            <th>Description</th>
+					            <th>Description</th> -->
 					            <th>Status</th>
 					            <th>Amount</th>
 					            <th>Date</th>
@@ -83,7 +83,7 @@
 					
 					                <td>${inc.title}</td>
 					
-					                <!-- User -->
+					                <%-- <!-- User -->
 					                <td>
 					                    <c:forEach var="u" items="${userList}">
 					                        <c:if test="${u.userId == inc.userId}">
@@ -102,7 +102,7 @@
 					                </td>
 					
 					                <!-- Description -->
-					                <td>${inc.description}</td>
+					                <td>${inc.description}</td> --%>
 					
 					                <!-- Status -->
 					                <td>
@@ -121,14 +121,17 @@
 					
 					                <!-- Action -->
 					                <td>
-					                    <a href="editIncome?id=${inc.incomeId}" class="btn btn-sm btn-warning">Edit</a>
+					                    <a href="editIncome?incomeId=${inc.incomeId}" class="btn btn-sm btn-warning">Edit</a>
 					
-					                    <a href="deleteIncome?id=${inc.incomeId}" 
+					                    <a href="deleteIncome?incomeId=${inc.incomeId}" 
 					                       class="btn btn-sm btn-danger"
 					                       onclick="return confirm('Are you sure you want to delete this income?')">
 					                       Delete
 					                    </a>
 					                </td>
+					                <td>										
+										<a class="btn btn-secondary" href="viewIncome?incomeId=${inc.incomeId}">View</a>
+									</td>
 					            </tr>
 					        </c:forEach>
 					

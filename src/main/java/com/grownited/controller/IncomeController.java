@@ -1,6 +1,8 @@
 package com.grownited.controller;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,6 +65,108 @@ public class IncomeController {
 	    model.addAttribute("statusList", statusList);
 
 	    return "IncomeList";
+	}
+	
+	// ------------------ INCOME ------------------
+
+	// Edit Income
+	/*
+	 * @GetMapping("editIncome") public String editIncome1(Integer incomeId, Model
+	 * model) { Optional<IncomeEntity> opIncome =
+	 * incomeRepository.findById(incomeId);
+	 * 
+	 * if(opIncome.isPresent()) { model.addAttribute("income", opIncome.get());
+	 * return "EditIncome"; } else { return "redirect:/incomeList"; } }
+	 */
+
+
+	// Delete Income
+	@GetMapping("deleteIncome")
+	public String deleteIncome(Integer incomeId) {
+	    incomeRepository.deleteById(incomeId);
+	    return "redirect:/incomeList";
+	}
+
+
+	// ---------------- VIEW INCOME ----------------
+	@GetMapping("/viewIncome")
+	public String viewIncome(Integer incomeId, Model model) {
+
+	    Optional<IncomeEntity> opIncome = incomeRepository.findById(incomeId);
+
+	    if (opIncome.isEmpty()) {
+	        return "redirect:/incomeList";
+	    }
+
+	    IncomeEntity income = opIncome.get();
+
+	    AccountEntity account = accountRepository.findById(income.getInaccountId()).orElse(null);
+	    StatusEntity status = statusRepository.findById(income.getStatusId()).orElse(null);
+
+	    model.addAttribute("income", income);
+	    model.addAttribute("account", account);
+	    model.addAttribute("status", status);
+
+	    return "IncomeView";
+	}
+
+
+
+	// ---------------- GET EDIT INCOME ----------------
+	@GetMapping("/editIncome")
+	public String editIncome(Integer incomeId, Model model) {
+
+	    Optional<IncomeEntity> opIncome = incomeRepository.findById(incomeId);
+
+	    if (opIncome.isEmpty()) {
+	        return "redirect:/incomeList";
+	    }
+
+	    IncomeEntity income = opIncome.get();
+
+	    // Send income + dropdown lists
+	    model.addAttribute("income", income);
+	    model.addAttribute("accountList", accountRepository.findAll());
+	    model.addAttribute("statusList", statusRepository.findAll());
+
+	    return "IncomeEdit";
+	}
+
+
+
+	// ---------------- POST UPDATE INCOME ----------------
+	@PostMapping("/updateIncome")
+	public String updateIncome(
+	        Integer incomeId,
+	        String title,
+	        Integer inaccountId,
+	        Integer statusId,
+	        Float amount,
+	        String date,
+	        String description,
+	        Boolean active
+	) {
+
+	    Optional<IncomeEntity> opIncome = incomeRepository.findById(incomeId);
+
+	    if (opIncome.isPresent()) {
+
+	        IncomeEntity income = opIncome.get();
+
+	        // Update fields
+	        income.setTitle(title);
+	        income.setInaccountId(inaccountId);
+	        income.setStatusId(statusId);
+	        income.setAmount(amount);
+	        income.setDate(LocalDate.parse(date));
+	        income.setDescription(description);
+	        income.setActive(active != null && active);
+
+	        // Save
+	        incomeRepository.save(income);
+	    }
+
+	    return "redirect:/incomeList";
 	}
 
 }

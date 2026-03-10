@@ -42,8 +42,6 @@ public class DashboardController {
 
 	    model.addAttribute("todayExpense",
 	        String.format("%.1f", todayExpense / 1000) + "k");
-
-
 		
 		return "AdminDashboard";
 	}

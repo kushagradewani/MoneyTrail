@@ -1,6 +1,7 @@
 package com.grownited.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.grownited.entity.CategoryEntity;
-import com.grownited.entity.SubCategoryEntity;
 import com.grownited.repository.CategoryRepository;
 import com.grownited.repository.SubCategoryRepository;
 
@@ -38,12 +38,29 @@ public class CategoryController {
 		model.addAttribute("categoryList",categoryList);
 		return "CategoryList";
 	}
+	
+	// ------------------ CATEGORY ------------------
+
+	/*
+	 * // Edit Category
+	 * 
+	 * @GetMapping("editCategory") public String editCategory(Integer categoryId,
+	 * Model model) { Optional<CategoryEntity> opCategory =
+	 * categoryRepository.findById(categoryId);
+	 * 
+	 * if(opCategory.isPresent()) { model.addAttribute("category",
+	 * opCategory.get()); return "EditCategory"; } else { return
+	 * "redirect:/categoryList"; } }
+	 */
+
+	// Delete Category
 	@GetMapping("deleteCategory")
 	public String deleteCategory(Integer categoryId) {
-		categoryRepository.deleteById(categoryId);
-		
-		return "redirect:/categoryList";//do not open jsp , open another url -> listHackathon
+	    categoryRepository.deleteById(categoryId);
+	    return "redirect:/categoryList";//do not open jsp , open another url -> listHackathon
 	}
+	
+	
 	
 	@GetMapping(value = {"subCategory"})
 	public String subCategory(Model model) {
@@ -52,28 +69,41 @@ public class CategoryController {
 		return "SubCategory";
 	}	
 	
-	@PostMapping("saveSubCategory")
-	public String saveCategory(SubCategoryEntity subCategoryEntity,CategoryEntity categoryEntity) {
-		subCategoryEntity.setActive(true);
-		subCategoryEntity.setCategoryId(subCategoryEntity.getCategoryId());
-		subCategoryRepository.save(subCategoryEntity); 
-		return "redirect:/subCategoryList";
+	// ---------------- GET EDIT CATEGORY ----------------
+	@GetMapping("/editCategory")
+	public String editCategory(Integer categoryId, Model model) {
+
+	    Optional<CategoryEntity> opCategory = categoryRepository.findById(categoryId);
+
+	    if (opCategory.isEmpty()) {
+	        return "redirect:/categoryList";
+	    }
+
+	    CategoryEntity category = opCategory.get();
+	    model.addAttribute("category", category);
+
+	    return "CategoryEdit";
 	}
-	@GetMapping(value = {"subCategoryList"})
-	public String subCategoryList(Model model) {
-		List<CategoryEntity> categoryList = categoryRepository.findAll();
-		model.addAttribute("categoryList",categoryList);
-		List<SubCategoryEntity> subCategoryList = subCategoryRepository.findAll();
-		model.addAttribute("subCategoryList",subCategoryList);
-		return "SubCategoryList";
+
+	// ---------------- POST UPDATE CATEGORY ----------------
+	@PostMapping("/updateCategory")
+	public String updateCategory(
+	        Integer categoryId,
+	        String categoryName,
+	        Boolean active
+	) {
+	    Optional<CategoryEntity> opCategory = categoryRepository.findById(categoryId);
+
+	    if (opCategory.isPresent()) {
+	        CategoryEntity category = opCategory.get();
+	        category.setCategoryName(categoryName);
+	        category.setActive(active != null && active);
+
+	        categoryRepository.save(category);
+	    }
+
+	    return "redirect:/categoryList";
 	}
-	@GetMapping("deleteSubCategory")
-	public String deleteSubCategory(Integer subCategoryId) {
-		subCategoryRepository.deleteById(subCategoryId);
-		
-		return "redirect:/subCategoryList";//do not open jsp , open another url -> listHackathon
-	}
-	
 	
 	
 }

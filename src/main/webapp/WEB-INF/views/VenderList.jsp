@@ -129,9 +129,9 @@
 												</c:otherwise>
 											</c:choose></td>
 
-										<td><a href="editCategory?id=${ven.venderId}"
+										<td><a href="editVender?venderId=${ven.venderId}"
 											class="btn btn-sm btn-warning"> Edit </a> <a
-											href="deleteCategory?id=${ven.venderId}"
+											href="deleteVender?venderId=${ven.venderId}"
 											class="btn btn-sm btn-danger"
 											onclick="return confirm('Are you sure you want to delete this category?')">
 												Delete </a></td>

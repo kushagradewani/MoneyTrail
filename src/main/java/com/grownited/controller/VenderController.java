@@ -1,6 +1,7 @@
 package com.grownited.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,11 +37,58 @@ public class VenderController {
 		return "VenderList";
 	}
 	
+	// ------------------ VENDER ------------------
+
+	// Edit Vender
+	/*
+	 * @GetMapping("editVender") public String editVender(Integer venderId, Model
+	 * model) { Optional<VenderEntity> opVender =
+	 * venderRepository.findById(venderId);
+	 * 
+	 * if(opVender.isPresent()) { model.addAttribute("vender", opVender.get());
+	 * return "EditVender"; } else { return "redirect:/venderList"; } }
+	 */
+
+	// Delete Vender
 	@GetMapping("deleteVender")
 	public String deleteVender(Integer venderId) {
-		venderRepository.deleteById(venderId);
-		
-		return "redirect:/VenderList";//do not open jsp , open another url -> listHackathon
+	    venderRepository.deleteById(venderId);
+	    return "redirect:/venderList";//do not open jsp , open another url -> listHackathon
 	}
 	
+	// ---------------- GET EDIT VENDER ----------------
+	@GetMapping("/editVender")
+	public String editVender(Integer venderId, Model model) {
+
+	    Optional<VenderEntity> opVender = venderRepository.findById(venderId);
+
+	    if (opVender.isEmpty()) {
+	        return "redirect:/venderList";
+	    }
+
+	    VenderEntity vender = opVender.get();
+	    model.addAttribute("vender", vender);
+
+	    return "VenderEdit";
+	}
+
+	// ---------------- POST UPDATE VENDER ----------------
+	@PostMapping("/updateVender")
+	public String updateVender(
+	        Integer venderId,
+	        String venderName,
+	        Boolean active
+	) {
+	    Optional<VenderEntity> opVender = venderRepository.findById(venderId);
+
+	    if (opVender.isPresent()) {
+	    	VenderEntity vender = opVender.get();
+	        vender.setVenderName(venderName);
+	        vender.setActive(active != null && active);
+
+	        venderRepository.save(vender);
+	    }
+
+	    return "redirect:/venderList";
+	}
 }

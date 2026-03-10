@@ -45,6 +45,13 @@ public class SessionController {
 		return "SignUp"; //jsp name
 	}
 	
+	@GetMapping("/Home")
+	public String openHome(Model model) {
+	    model.addAttribute("pageTitle", "Home");
+	    model.addAttribute("activePage", "dashboard");
+	    return "User/pages/Home";
+	}
+	
 	@GetMapping("/login")
 	public String openLoginPage() {
 		return "Login";
@@ -188,7 +195,7 @@ public class SessionController {
 	}
 	
 	@GetMapping("/logout")
-	public String logoyut(HttpSession session) {
+	public String logout(HttpSession session) {
 		session.invalidate();
 		return "Login";
 	}

@@ -58,11 +58,11 @@
 								<tr>
 									<th>#</th>
 									<th>Title</th>
-									<th>Category</th>
+									<!-- <th>Category</th>
 									<th>Sub Category</th>
 									<th>Vender</th>
 									<th>Account</th>
-									<th>Amount</th>
+									<th>Amount</th> -->
 									<th>Status</th>
 									<th>Date</th>
 									<th>Action</th>
@@ -82,7 +82,7 @@
 									<tr>
 										<th scope="row">${i.index + 1}</th>
 										<td>${exp.title}</td>
-										<td>
+<%-- 										<td>
 										    <c:forEach var="cat" items="${categoryList}">
 										        <c:if test="${cat.categoryId == exp.categoryId}">
 										            ${cat.categoryName}
@@ -109,7 +109,7 @@
 										            ${acc.title}
 										        </c:if>
 										    </c:forEach>
-										</td>
+										</td> --%>
 										<td>
 										    <c:forEach var="st" items="${statusList}">
 										        <c:if test="${st.statusId == exp.statusId}">
@@ -121,14 +121,16 @@
 										<td>${exp.date}</td>
 
 										<td>
-											<a href="editExpense?id=${exp.expenseId}"
-												class="btn btn-sm btn-warning">Edit</a>
+											<a href="editExpense?expenseId=${exp.expenseId}" class="btn btn-warning">Edit</a>
 
-											<a href="deleteExpense?id=${exp.expenseId}"
+											<a href="deleteExpense?expenseId=${exp.expenseId}"
 												class="btn btn-sm btn-danger"
 												onclick="return confirm('Are you sure you want to delete this expense?')">
 												Delete
 											</a>
+										</td>
+										<td>										
+										    <a class="btn btn-secondary" href="viewExpense?expenseId=${exp.expenseId}">View</a>
 										</td>
 									</tr>
 								</c:forEach>

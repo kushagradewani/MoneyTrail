@@ -154,12 +154,12 @@
 						
 						                <!-- Actions -->
 						                <td>
-						                    <a href="editSubCategory?id=${sub.subCategoryId}"
+						                    <a href="editSubCategory?subCategoryId=${sub.subCategoryId}"
 						                       class="btn btn-sm btn-warning">
 						                        Edit
 						                    </a>
 						
-						                    <a href="deleteSubCategory?id=${sub.subCategoryId}"
+						                    <a href="deleteSubCategory?subCategoryId=${sub.subCategoryId}"
 						                       class="btn btn-sm btn-danger"
 						                       onclick="return confirm('Are you sure you want to delete this sub category?')">
 						                        Delete
