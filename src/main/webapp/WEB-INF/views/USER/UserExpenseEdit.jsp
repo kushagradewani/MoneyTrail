@@ -26,10 +26,10 @@
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/userbootstrap.min.css" rel="stylesheet">
 
     <!-- Template Styles -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/userstyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -44,20 +44,20 @@
     <!-- Spinner End -->
 
     <!-- Sidebar -->
-    <jsp:include page="Sidebar.jsp"></jsp:include>
+    <jsp:include page="UserSidebar.jsp"></jsp:include>
 
     <!-- Content Start -->
     <div class="content">
 
         <!-- Navbar -->
-        <jsp:include page="Header.jsp"></jsp:include>
+        <jsp:include page="UserHeader.jsp"></jsp:include>
 
         <!-- Edit Expense Form -->
         <div class="container-fluid pt-4 px-4">
             <div class="bg-secondary rounded p-4">
                 <h3 class="text-white mb-4">Edit Expense</h3>
 
-                <form action="updateExpense" method="post">
+                <form action="/user/updateExpense" method="post">
                     <input type="hidden" name="expenseId" value="${expense.expenseId}" />
 
                     <div class="mb-3">
@@ -147,7 +147,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end">
-                        <a href="expenseList" class="btn btn-dark me-2">Back</a>
+                        <a href="/user/expenseList" class="btn btn-dark me-2">Back</a>
                         <button type="submit" class="btn btn-success">Update Expense</button>
                     </div>
                 </form>
@@ -155,7 +155,7 @@
         </div>
 
         <!-- Footer -->
-        <jsp:include page="Footer.jsp"></jsp:include>
+        <jsp:include page="UserFooter.jsp"></jsp:include>
     </div>
     <!-- Content End -->
 

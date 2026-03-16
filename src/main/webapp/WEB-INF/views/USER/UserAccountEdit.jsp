@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Edit Category</title>
+    <title>Edit Account</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <link href="img/favicon.ico" rel="icon">
@@ -16,44 +16,55 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/userbootstrap.min.css" rel="stylesheet">
+    <link href="css/userstyle.css" rel="stylesheet">
 </head>
-<body> 
+<body>
 <div class="container-fluid position-relative d-flex p-0">
 
-    <jsp:include page="Sidebar.jsp"></jsp:include>
+    <jsp:include page="UserSidebar.jsp"></jsp:include>
 
     <div class="content">
-        <jsp:include page="Header.jsp"></jsp:include>
+        <jsp:include page="UserHeader.jsp"></jsp:include>
 
         <div class="container-fluid pt-4 px-4">
             <div class="bg-secondary rounded p-4">
-                <h3 class="text-white mb-4">Edit Category</h3>
+                <h3 class="text-white mb-4">Edit Account</h3>
 
-                <form action="updateCategory" method="post">
-                    <input type="hidden" name="categoryId" value="${category.categoryId}" />
+                <form action="updateAccount" method="post">
+                    <input type="hidden" name="inaccountId" value="${account.inaccountId}" />
 
                     <div class="mb-3">
-                        <label class="form-label text-white">Category Name</label>
-                        <input type="text" name="categoryName" class="form-control" value="${category.categoryName}" required />
+                        <label class="form-label text-white">Title</label>
+                        <input type="text" name="title" class="form-control" value="${account.title}" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-white">Amount</label>
+                        <input type="number" name="amount" class="form-control" value="${account.amount}" step="0.01" required />
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="exDefault" class="form-check-input" 
+                               <c:if test="${account.exDefault}">checked</c:if> />
+                        <label class="form-check-label text-white">Default</label>
                     </div>
 
                     <div class="mb-3 form-check">
                         <input type="checkbox" name="active" class="form-check-input" 
-                               <c:if test="${category.active}">checked</c:if> />
+                               <c:if test="${account.active}">checked</c:if> />
                         <label class="form-check-label text-white">Active</label>
                     </div>
 
                     <div class="d-flex justify-content-end">
-                        <a href="categoryList" class="btn btn-dark me-2">Back</a>
-                        <button type="submit" class="btn btn-success">Update Category</button>
+                        <a href="/user/accountList" class="btn btn-dark me-2">Back</a>
+                        <button type="submit" class="btn btn-success">Update Account</button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <jsp:include page="Footer.jsp"></jsp:include>
+        <jsp:include page="UserFooter.jsp"></jsp:include>
     </div>
 
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>

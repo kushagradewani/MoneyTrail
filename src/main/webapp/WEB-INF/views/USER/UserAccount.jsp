@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
- 
+
 <head>
     <meta charset="utf-8">
-    <title>Category</title>
+    <title>Account Type</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -29,10 +29,10 @@
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/userbootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/userstyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -47,60 +47,90 @@
 
 
         <!-- SideBar Start -->
-        <jsp:include page="Sidebar.jsp"></jsp:include>
+        <jsp:include page="UserSidebar.jsp"></jsp:include>
         <!-- SideBar End -->
 
 
         <!-- Content Start -->
         <div class="content">
             <!-- Navbar Start -->
-            <jsp:include page="Header.jsp"></jsp:include>  
+            <jsp:include page="UserHeader.jsp"></jsp:include>  
             <!-- Navbar End -->
             
             <div class="col-sm-12 col-xl-6 pt-4 px-4">
 			    <div class="bg-secondary rounded h-100 p-4">
 			        <div class="d-flex justify-content-between align-items-center mb-4">
-					    <h6 class="mb-0">Add Category</h6>
-					    <a href="categoryList" class="btn btn-sm btn-outline-light">
-					        View All Categories
+					    <h6 class="mb-0">Add Account Type</h6>
+					    <a href="/user/accountList" class="btn btn-sm btn-outline-light">
+					        View All Account Type
 					    </a>
 					</div>
 
 			
-			        <form action="saveCategory" method="post">
-			
-			            <!-- Hidden Category ID -->
-			            <input type="hidden" name="categoryId" value="">
-			
-			            <!-- Category Name -->
-			            <div class="mb-3">
-			                <label for="categoryName" class="form-label">Category Name</label>
-			                <input 
-			                    type="text" 
-			                    class="form-control" 
-			                    id="categoryName"
-			                    name="categoryName"
-			                    placeholder="Enter category name"
-			                    required>
-			            </div>
-			            
-			            <small class="text-muted fst-italic">
-					        Example: Food, Transport, Utilities, Shopping, Salary
+			        <form action="/user/saveAccount" method="post">
+					
+					    <!-- Hidden Account ID -->
+					    <input type="hidden" name="inaccountId" value="">
+					
+					    <!-- Account Title -->
+					    <div class="mb-3">
+					        <label for="accountTitle" class="form-label">Account Title</label>
+					        <input 
+					            type="text" 
+					            class="form-control" 
+					            id="accountTitle"
+					            name="title"
+					            placeholder="Enter account title"
+					            required>
+					    </div>
+					
+						<!-- Is Default Account -->
+					    <div class="mb-3">
+					        <label for="exDefault" class="form-label">Default Account</label>
+					        <input 
+					            type="text" 
+					            class="form-control" 
+					            id="exDefault"
+					            name="exDefault"
+					            placeholder="Yes or No"
+					            required>
+					    </div>
+
+					
+					    <!-- Amount -->
+					    <div class="mb-3">
+					        <label for="amount" class="form-label">Amount</label>
+					        <input 
+					            type="number" 
+					            class="form-control" 
+					            id="amount"
+					            name="amount" 
+					            placeholder="Enter amount" 
+					            step="0.01"
+					            required>
+					    </div>
+					
+					    <!-- Info / Example Text -->
+					    <small class="text-muted fst-italic">
+					        Example: Cash, Debit Card, Credit Card for Account Title; Yes or No for Default Account
 					    </small><br><br>
-			
-			            <!-- Submit Button -->
-			            <button type="submit" class="btn btn-primary">
-			                Save Category
-			            </button>
-			            <a href="categoryList" class="btn btn-secondary">
-		                    Cancel
-		                </a>
-			
-			        </form>
+					
+					    <!-- Save Button -->
+					    <button type="submit" class="btn btn-primary">
+					        Save Account
+					    </button>
+					
+					    <!-- Cancel Button -->
+					    <a href="/user/accountList" class="btn btn-secondary">
+					        Cancel
+					    </a>
+					
+					</form>
+
 			    </div>
 			</div>
             <!-- Footer Start -->
-            <jsp:include page="Footer.jsp"></jsp:include>
+            <jsp:include page="UserFooter.jsp"></jsp:include>
             <!-- Footer End -->
         </div>
         <!-- Content End -->

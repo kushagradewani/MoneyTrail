@@ -30,26 +30,26 @@
 <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
 	rel="stylesheet" />
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+<link href="css/userbootstrap.min.css" rel="stylesheet">
+<link href="css/userstyle.css" rel="stylesheet">
 
 </head>
 
 <body>
 	<div class="container-fluid position-relative d-flex p-0">
 
-		<jsp:include page="Sidebar.jsp"></jsp:include>
+		<jsp:include page="UserSidebar.jsp"></jsp:include>
 
 		<div class="content">
 
-			<jsp:include page="Header.jsp"></jsp:include>
+			<jsp:include page="UserHeader.jsp"></jsp:include>
 
 			<div class="col-12 pt-4 px-4">
 				<div class="bg-secondary rounded h-100 p-4">
 
 					<div class="d-flex justify-content-between align-items-center mb-4">
 						<h6 class="mb-0">All Expenses</h6>
-						<a href="expense" class="btn btn-sm btn-info">New</a>
+						<a href="/user/expense" class="btn btn-sm btn-info">New</a>
 					</div>
 
 					<div class="table-responsive">
@@ -121,16 +121,16 @@
 										<td>${exp.date}</td>
 
 										<td>
-											<a href="editExpense?expenseId=${exp.expenseId}" class="btn btn-warning">Edit</a>
+											<a href="/user/editExpense?expenseId=${exp.expenseId}" class="btn btn-warning">Edit</a>
 
-											<a href="deleteExpense?expenseId=${exp.expenseId}"
+											<a href="/user/deleteExpense?expenseId=${exp.expenseId}"
 												class="btn btn-sm btn-danger"
 												onclick="return confirm('Are you sure you want to delete this expense?')">
 												Delete
 											</a>
 										</td>
 										<td>										
-										    <a class="btn btn-secondary" href="viewExpense?expenseId=${exp.expenseId}">View</a>
+										    <a class="btn btn-secondary" href="/user/viewExpense?expenseId=${exp.expenseId}">View</a>
 										</td>
 									</tr>
 								</c:forEach>
@@ -142,7 +142,7 @@
 				</div>
 			</div>
 
-			<jsp:include page="Footer.jsp"></jsp:include>
+			<jsp:include page="UserFooter.jsp"></jsp:include>
 
 		</div>
 	</div>

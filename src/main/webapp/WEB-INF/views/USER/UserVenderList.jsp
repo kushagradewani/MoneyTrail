@@ -7,7 +7,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Category List</title> 
+<title>Vender List</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -37,10 +37,10 @@
 	rel="stylesheet" />
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/userbootstrap.min.css" rel="stylesheet">
 
 <!-- Template Stylesheet -->
-<link href="css/style.css" rel="stylesheet">
+<link href="css/userstyle.css" rel="stylesheet">
 <style>
 .UPCOMING {
 	background: #17a2b8;
@@ -78,22 +78,22 @@
 
 
 		<!-- SideBar Start -->
-		<jsp:include page="Sidebar.jsp"></jsp:include>
+		<jsp:include page="UserSidebar.jsp"></jsp:include>
 		<!-- SideBar End -->
 
 
 		<!-- Content Start -->
 		<div class="content">
 			<!-- Navbar Start -->
-			<jsp:include page="Header.jsp"></jsp:include>
+			<jsp:include page="UserHeader.jsp"></jsp:include>
 			<!-- Navbar End -->
 
 			<div class="col-12 pt-4 px-4">
 				<div class="bg-secondary rounded h-100 p-4">
 
 					<div class="d-flex justify-content-between align-items-center mb-4">
-						<h6 class="mb-0">All Category</h6>
-						<a href="category" class="btn btn-sm btn-info">New</a>
+						<h6 class="mb-0">All Vender</h6>
+						<!-- <a href="category" class="btn btn-sm btn-info">New</a> -->
 					</div>
 
 					<div class="table-responsive">
@@ -101,27 +101,27 @@
 							<thead>
 								<tr>
 									<th scope="col">#</th>
-									<th scope="col">Category Name</th>
+									<th scope="col">Vender Name</th>
 									<th scope="col">Status</th>
 									<th scope="col">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 
-								<c:if test="${empty categoryList}">
+								<c:if test="${empty venderList}">
 									<tr>
 										<td colspan="4" class="text-center text-muted">No
-											categories found</td>
+											Vender found</td>
 									</tr>
 								</c:if>
 
-								<c:forEach var="cat" items="${categoryList}" varStatus="i">
+								<c:forEach var="ven" items="${venderList}" varStatus="i">
 									<tr>
 										<th scope="row">${i.index + 1}</th>
-										<td>${cat.categoryName}</td>
+										<td>${ven.venderName}</td>
 
 										<td><c:choose>
-												<c:when test="${cat.active}">
+												<c:when test="${ven.active}">
 													<span class="badge bg-success">Active</span>
 												</c:when>
 												<c:otherwise>
@@ -129,12 +129,12 @@
 												</c:otherwise>
 											</c:choose></td>
 
-										<td><a href="editCategory?categoryId=${cat.categoryId}"
+										<%-- <td><a href="editVender?venderId=${ven.venderId}"
 											class="btn btn-sm btn-warning"> Edit </a> <a
-											href="deleteCategory?categoryId=${cat.categoryId}"
+											href="deleteVender?venderId=${ven.venderId}"
 											class="btn btn-sm btn-danger"
 											onclick="return confirm('Are you sure you want to delete this category?')">
-												Delete </a></td>
+												Delete </a></td> --%>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -143,7 +143,7 @@
 				</div>
 			</div>
 			<!-- Footer Start -->
-			<jsp:include page="Footer.jsp"></jsp:include>
+			<jsp:include page="UserFooter.jsp"></jsp:include>
 			<!-- Footer End -->
 		</div>
 	</div>

@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
 import com.grownited.entity.userEntity;
+import com.grownited.repository.ExpenseRepository;
+import com.grownited.repository.IncomeRepository;
 import com.grownited.repository.UserRepository;
 import com.grownited.service.MailService;
 import com.grownited.service.UserService;
@@ -38,6 +40,12 @@ public class SessionController {
 	PasswordEncoder passwordEncoder;
 	
 	@Autowired
+	IncomeRepository incomeRepository;
+	
+	@Autowired
+	ExpenseRepository expenseRepository;
+	
+	@Autowired
 	Cloudinary cloudinary;
 	
 	@GetMapping("/signup")
@@ -47,9 +55,31 @@ public class SessionController {
 	
 	@GetMapping("/Home")
 	public String openHome(Model model) {
+		Double totalIncome = incomeRepository.totalIncome();
+	    totalIncome = totalIncome == null ? 0 : totalIncome;
+
+	    Double totalExpense = expenseRepository.totalExpense();
+	    totalExpense = totalExpense == null ? 0 : totalExpense;
+
+	    Double todayExpense = expenseRepository.todayExpense();
+	    todayExpense = todayExpense == null ? 0 : todayExpense;
+
+	    Double netProfit = totalIncome - totalExpense;
+
+	    model.addAttribute("totalIncome",
+	        String.format("%.1f", totalIncome / 1000) + "k");
+
+	    model.addAttribute("totalExpense",
+	        String.format("%.1f", totalExpense / 1000) + "k");
+
+	    model.addAttribute("netProfit",
+	        String.format("%.1f", netProfit / 1000) + "k");
+
+	    model.addAttribute("todayExpense",
+	        String.format("%.1f", todayExpense / 1000) + "k");
 	    model.addAttribute("pageTitle", "Home");
 	    model.addAttribute("activePage", "dashboard");
-	    return "User/pages/Home";
+	    return "USER/UserHome";
 	}
 	
 	@GetMapping("/login")
@@ -74,11 +104,12 @@ public class SessionController {
 
 	            session.setAttribute("user", dbUser);
 
+	          
 	            if (dbUser.getRole().equals("ADMIN")) {
 	                return "redirect:/adminDashboard";
 	            }
 	            else if (dbUser.getRole().equals("USER")) {
-	                return "redirect:/user-dashboard";
+	                return "redirect:/Home";
 	            }
 	        }
 	    }

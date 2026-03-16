@@ -27,10 +27,10 @@
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/userbootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/userstyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -45,14 +45,14 @@
     <!-- Spinner End -->
 
     <!-- SideBar Start -->
-    <jsp:include page="Sidebar.jsp"></jsp:include>
+    <jsp:include page="UserSidebar.jsp"></jsp:include>
     <!-- SideBar End -->
 
     <!-- Content Start -->
     <div class="content">
         
         <!-- Navbar -->
-        <jsp:include page="Header.jsp"></jsp:include>
+        <jsp:include page="UserHeader.jsp"></jsp:include>
         
         <div class="container-fluid pt-4 px-4">
             <div class="bg-secondary rounded p-4">
@@ -149,15 +149,15 @@
 
                 <!-- Buttons -->
                 <div class="d-flex justify-content-end mt-4">
-                    <a href="expenseList" class="btn btn-dark me-2">Back</a>
-                    <a href="editExpense?expenseId=${expense.expenseId}" class="btn btn-warning">Edit</a>
+                    <a href="/user/expenseList" class="btn btn-dark me-2">Back</a>
+                    <a href="/user/editExpense?expenseId=${expense.expenseId}" class="btn btn-warning">Edit</a>
                 </div>
 
             </div>
         </div>
 
         <!-- Footer -->
-        <jsp:include page="Footer.jsp"></jsp:include>
+        <jsp:include page="UserFooter.jsp"></jsp:include>
 
     </div>
     <!-- Content End -->

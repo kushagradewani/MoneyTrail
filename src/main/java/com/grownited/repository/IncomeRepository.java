@@ -12,4 +12,5 @@ public interface IncomeRepository extends JpaRepository<IncomeEntity, Integer> {
 	 @Query("SELECT SUM(i.amount) FROM IncomeEntity i")
 	 Double totalIncome();
 
+	    
 }

@@ -29,10 +29,10 @@
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/userbootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/userstyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -47,27 +47,27 @@
 
 
         <!-- SideBar Start -->
-        <jsp:include page="Sidebar.jsp"></jsp:include>
+        <jsp:include page="UserSidebar.jsp"></jsp:include>
         <!-- SideBar End -->
 
 
         <!-- Content Start -->
         <div class="content">
             <!-- Navbar Start -->
-            <jsp:include page="Header.jsp"></jsp:include>  
+            <jsp:include page="UserHeader.jsp"></jsp:include>  
             <!-- Navbar End -->
             
             <div class="col-sm-12 col-xl-6 pt-4 px-4">
 			    <div class="bg-secondary rounded h-100 p-4">
 			        <div class="d-flex justify-content-between align-items-center mb-4">
 					    <h6 class="mb-0">Add Expense</h6>
-					    <a href="expenseList" class="btn btn-sm btn-outline-light">
+					    <a href="/user/expenseList" class="btn btn-sm btn-outline-light">
 					        View All Expense
 					    </a>
 					</div>
 
 			
-			        <form action="saveExpense" method="post" class="glass-form p-4">
+			        <form action="/user/saveExpense" method="post" class="glass-form p-4">
 
 					    <!-- Title -->
 					    <div class="mb-3">
@@ -163,14 +163,14 @@
 					
 					    <!-- Buttons -->
 					    <button type="submit" class="btn btn-primary">Save Expense</button>
-					    <a href="expenseList" class="btn btn-secondary">Cancel</a>
+					    <a href="/user/expenseList" class="btn btn-secondary">Cancel</a>
 					
 					</form>
 
 			    </div>
 			</div>
             <!-- Footer Start -->
-            <jsp:include page="Footer.jsp"></jsp:include>
+            <jsp:include page="UserFooter.jsp"></jsp:include>
             <!-- Footer End -->
         </div>
         <!-- Content End -->

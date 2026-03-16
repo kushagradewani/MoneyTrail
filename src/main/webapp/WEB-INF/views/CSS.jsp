@@ -6,7 +6,7 @@
 html,body{
     height:100%;
     margin:0;
-}
+} 
 html, body { height: 100%; overflow-y: auto; }
 body{
     font-family:'Poppins',sans-serif;

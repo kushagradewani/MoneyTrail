@@ -37,10 +37,10 @@
 	rel="stylesheet" />
 
 <!-- Customized Bootstrap Stylesheet -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/userbootstrap.min.css" rel="stylesheet">
 
 <!-- Template Stylesheet -->
-<link href="css/style.css" rel="stylesheet">
+<link href="css/userstyle.css" rel="stylesheet">
 <style>
 .UPCOMING {
 	background: #17a2b8;
@@ -78,14 +78,14 @@
 
 
 		<!-- SideBar Start -->
-		<jsp:include page="Sidebar.jsp"></jsp:include>
+		<jsp:include page="UserSidebar.jsp"></jsp:include>
 		<!-- SideBar End -->
 
 
 		<!-- Content Start -->
 		<div class="content">
 			<!-- Navbar Start -->
-			<jsp:include page="Header.jsp"></jsp:include>
+			<jsp:include page="UserHeader.jsp"></jsp:include>
 			<!-- Navbar End -->
 
 			<div class="col-12 pt-4 px-4">
@@ -93,7 +93,7 @@
 
 					<div class="d-flex justify-content-between align-items-center mb-4">
 						<h6 class="mb-0">All Category</h6>
-						<a href="category" class="btn btn-sm btn-info">New</a>
+						<!-- <a href="category" class="btn btn-sm btn-info">New</a> -->
 					</div>
 
 					<div class="table-responsive">
@@ -129,12 +129,12 @@
 												</c:otherwise>
 											</c:choose></td>
 
-										<td><a href="editCategory?categoryId=${cat.categoryId}"
+										<%-- <td><a href="editCategory?categoryId=${cat.categoryId}"
 											class="btn btn-sm btn-warning"> Edit </a> <a
 											href="deleteCategory?categoryId=${cat.categoryId}"
 											class="btn btn-sm btn-danger"
 											onclick="return confirm('Are you sure you want to delete this category?')">
-												Delete </a></td>
+												Delete </a></td> --%>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -143,7 +143,7 @@
 				</div>
 			</div>
 			<!-- Footer Start -->
-			<jsp:include page="Footer.jsp"></jsp:include>
+			<jsp:include page="UserFooter.jsp"></jsp:include>
 			<!-- Footer End -->
 		</div>
 	</div>
