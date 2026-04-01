@@ -61,13 +61,13 @@
 			    <div class="bg-secondary rounded h-100 p-4">
 			        <div class="d-flex justify-content-between align-items-center mb-4">
 					    <h6 class="mb-0">Add Income</h6>
-					    <a href="incomeList" class="btn btn-sm btn-outline-light">
+					    <a href="/userIncomeList" class="btn btn-sm btn-outline-light">
 					        View All Income
 					    </a>
 					</div>
 
 			
-			        <form action="/user/saveIncome" method="post">
+			        <form action="/userSaveIncome" method="post">
 							
 					<!-- Hidden Income ID -->
 					<input type="hidden" name="incomeId" value="">
@@ -96,7 +96,7 @@
 					</div>
 				
 					<!-- User ID -->
-					<div class="mb-3">
+					<!-- <div class="mb-3">
 					    <label for="userId" class="form-label">User</label>
 					    <input 
 					        type="number" 
@@ -105,7 +105,7 @@
 					        name="userId"
 					        placeholder="Enter user id"
 					        required>
-					</div>
+					</div> -->
 				
 					<!-- Account -->
 					<div class="mb-3">

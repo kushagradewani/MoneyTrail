@@ -61,13 +61,13 @@
 			    <div class="bg-secondary rounded h-100 p-4">
 			        <div class="d-flex justify-content-between align-items-center mb-4">
 					    <h6 class="mb-0">Add Expense</h6>
-					    <a href="/user/expenseList" class="btn btn-sm btn-outline-light">
+					    <a href="/userExpenseList" class="btn btn-sm btn-outline-light">
 					        View All Expense
 					    </a>
 					</div>
 
 			
-			        <form action="/user/saveExpense" method="post" class="glass-form p-4">
+			        <form action="/userSaveExpense" method="post" class="glass-form p-4">
 
 					    <!-- Title -->
 					    <div class="mb-3">

@@ -49,7 +49,7 @@
 
 					<div class="d-flex justify-content-between align-items-center mb-4">
 						<h6 class="mb-0">All Income</h6>
-						<a href="/user/income" class="btn btn-sm btn-info">New</a>
+						<a href="/userIncome" class="btn btn-sm btn-info">New</a>
 					</div>
 
 					<div class="table-responsive">
@@ -121,16 +121,16 @@
 					
 					                <!-- Action -->
 					                <td>
-					                    <a href="/user/editIncome?incomeId=${inc.incomeId}" class="btn btn-sm btn-warning">Edit</a>
+					                    <a href="/userEditIncome?incomeId=${inc.incomeId}" class="btn btn-sm btn-warning">Edit</a>
 					
-					                    <a href="/user/deleteIncome?incomeId=${inc.incomeId}" 
+					                    <a href="/userDeleteIncome?incomeId=${inc.incomeId}" 
 					                       class="btn btn-sm btn-danger"
 					                       onclick="return confirm('Are you sure you want to delete this income?')">
 					                       Delete
 					                    </a>
 					                </td>
 					                <td>										
-										<a class="btn btn-secondary" href="/user/viewIncome?incomeId=${inc.incomeId}">View</a>
+										<a class="btn btn-secondary" href="/viewUserIncome?incomeId=${inc.incomeId}">View</a>
 									</td>
 					            </tr>
 					        </c:forEach>

@@ -93,7 +93,7 @@
 		
 		            <div class="d-flex justify-content-between align-items-center mb-4">
 		                <h6 class="mb-0">All Accounts</h6>
-		                <a href="/user/account" class="btn btn-sm btn-info">New</a>
+		                <a href="/userAccount" class="btn btn-sm btn-info">New</a>
 		            </div>
 		
 		            <div class="table-responsive">
@@ -133,8 +133,8 @@
 		                                    </c:choose>
 		                                </td>
 		                                <td>
-		                                    <a href="/user/editAccount?inaccountId=${acc.inaccountId}" class="btn btn-sm btn-warning">Edit</a>
-		                                    <a href="/user/deleteAccount?inaccountId=${acc.inaccountId}" class="btn btn-sm btn-danger"
+		                                    <a href="/userEditAccount?inaccountId=${acc.inaccountId}" class="btn btn-sm btn-warning">Edit</a>
+		                                    <a href="/userDeleteAccount?inaccountId=${acc.inaccountId}" class="btn btn-sm btn-danger"
 		                                       onclick="return confirm('Are you sure you want to delete this account?')">Delete</a>
 		                                </td>
 		                            </tr>

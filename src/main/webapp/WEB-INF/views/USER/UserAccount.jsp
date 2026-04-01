@@ -61,13 +61,13 @@
 			    <div class="bg-secondary rounded h-100 p-4">
 			        <div class="d-flex justify-content-between align-items-center mb-4">
 					    <h6 class="mb-0">Add Account Type</h6>
-					    <a href="/user/accountList" class="btn btn-sm btn-outline-light">
+					    <a href="/userAccountList" class="btn btn-sm btn-outline-light">
 					        View All Account Type
 					    </a>
 					</div>
 
 			
-			        <form action="/user/saveAccount" method="post">
+			        <form action="/userSaveAccount" method="post">
 					
 					    <!-- Hidden Account ID -->
 					    <input type="hidden" name="inaccountId" value="">
@@ -121,7 +121,7 @@
 					    </button>
 					
 					    <!-- Cancel Button -->
-					    <a href="/user/accountList" class="btn btn-secondary">
+					    <a href="/userAccountList" class="btn btn-secondary">
 					        Cancel
 					    </a>
 					

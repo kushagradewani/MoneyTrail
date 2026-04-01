@@ -31,10 +31,10 @@
             <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
             <!-- Customized Bootstrap Stylesheet -->
-            <link href="css/userbootstrap.min.css" rel="stylesheet">
+            <link href="css/bootstrap.min.css" rel="stylesheet">
 
             <!-- Template Stylesheet -->
-            <link href="css/userstyle.css" rel="stylesheet">
+            <link href="css/style.css" rel="stylesheet">
         </head>
 
         <body>
@@ -50,14 +50,14 @@
 
 
                 <!-- SideBar Start -->
-                <jsp:include page="UserSidebar.jsp"></jsp:include>
+                <jsp:include page="Sidebar.jsp"></jsp:include>
                 <!-- SideBar End -->
 
 
                 <!-- Content Start -->
                 <div class="content">
                     <!-- Navbar Start -->
-                    <jsp:include page="UserHeader.jsp"></jsp:include>
+                    <jsp:include page="Header.jsp"></jsp:include>
                     <!-- Navbar End -->
 
                     <!-- Profile Start -->
@@ -79,11 +79,11 @@
 					
 					                <hr>
 					
-					                <p class="text-muted"><strong>Contact:</strong> ${sessionScope.user.contactNum}</p>
-					                <p class="text-muted"><strong>Gender:</strong> ${sessionScope.user.gender}</p>
-					                <p class="text-muted"><strong>Birth Year:</strong> ${sessionScope.user.birthYear}</p>
+					                <p><strong>Contact:</strong> ${sessionScope.user.contactNum}</p>
+					                <p><strong>Gender:</strong> ${sessionScope.user.gender}</p>
+					                <p><strong>Birth Year:</strong> ${sessionScope.user.birthYear}</p>
 					
-					                <p class="text-muted"><strong>Status:</strong>
+					                <p><strong>Status:</strong>
 					                    <c:choose>
 					                        <c:when test="${sessionScope.user.active}">
 					                            <span class="text-success">Active</span>
@@ -94,7 +94,7 @@
 					                    </c:choose>
 					                </p>
 					
-					                <p class="text-muted"><small>Joined: ${sessionScope.user.createdAt}</small></p>
+					                <p><small>Joined: ${sessionScope.user.createdAt}</small></p>
 					            </div>
 					        </div>
 					
@@ -104,39 +104,39 @@
 					
 					                <h4 class="mb-4 text-primary">Edit Profile</h4>
 					
-					                <form action="updateUser" method="post" enctype="multipart/form-data">
+					                <form action="updateAdmin" method="post" enctype="multipart/form-data">
 					
 					                    <input type="hidden" name="userId" value="${sessionScope.user.userId}"/>
 					
 					                    <div class="row">
 					                        <div class="col-md-6 mb-3">
-					                            <p class="text-muted m-0">First Name</p>
+					                            <label>First Name</label>
 					                            <input type="text" name="firstName" class="form-control bg-dark text-white border-0"
 					                                value="${sessionScope.user.firstName}">
 					                        </div>
 					
 					                        <div class="col-md-6 mb-3">
-					                            <p class="text-muted m-0">Last Name</p>
+					                            <label>Last Name</label>
 					                            <input type="text" name="lastName" class="form-control bg-dark text-white border-0"
 					                                value="${sessionScope.user.lastName}">
 					                        </div>
 					                    </div>
 					
 					                    <div class="mb-3">
-					                        <p class="text-muted m-0">Email</p>
+					                        <label>Email</label>
 					                        <input type="email" name="email" class="form-control bg-dark text-white border-0"
 					                            value="${sessionScope.user.email}">
 					                    </div>
 					
 					                    <%-- <div class="mb-3">
-					                        <p class="text-muted m-0">Password</p>
+					                        <label>Password</label>
 					                        <input type="password" name="password" class="form-control bg-dark text-white border-0"
 					                            value="${sessionScope.user.password}">
 					                    </div> --%>
 					
 					                    <div class="row">
 					                        <div class="col-md-6 mb-3">
-					                            <p class="text-muted m-0">Gender</p>
+					                            <label>Gender</label>
 					                            <select name="gender" class="form-control bg-dark text-white border-0">
 					                                <option ${sessionScope.user.gender == 'Male' ? 'selected' : ''}>Male</option>
 					                                <option ${sessionScope.user.gender == 'Female' ? 'selected' : ''}>Female</option>
@@ -144,7 +144,7 @@
 					                        </div>
 					
 					                        <div class="col-md-6 mb-3">
-					                            <p class="text-muted m-0">Birth Year</p>
+					                            <label>Birth Year</label>
 					                            <input type="number" name="birthYear"
 					                                class="form-control bg-dark text-white border-0"
 					                                value="${sessionScope.user.birthYear}">
@@ -152,14 +152,14 @@
 					                    </div>
 					
 					                    <div class="mb-3">
-					                        <p class="text-muted m-0">Contact Number</p>
+					                        <label>Contact Number</label>
 					                        <input type="text" name="contactNum"
 					                            class="form-control bg-dark text-white border-0"
 					                            value="${sessionScope.user.contactNum}">
 					                    </div>
 					
 					                    <div class="mb-3">
-										    <p class="text-muted m-0">Profile Picture</p>
+										    <label>Profile Picture</label>
 										
 										    <!-- Current Image Preview -->
 										    <div class="mb-2 text-center">
@@ -170,13 +170,13 @@
 										    </div>
 										
 										    <!-- File Upload -->
-										    <p class="text-muted m-1">Profile Picture</p>
+										    <label class="form-label">Profile Picture</label>
 				                            <input type="file" name="profilePic" class="form-control">
 										</div>
 					
 					                    <%-- <div class="row">
 					                        <div class="col-md-6 mb-3">
-					                            <p class="text-muted m-0">Role</p>
+					                            <label>Role</label>
 					                            <select name="role" class="form-control bg-dark text-white border-0">
 					                                <option ${sessionScope.user.role == 'Admin' ? 'selected' : ''}>Admin</option>
 					                                <option ${sessionScope.user.role == 'Customer' ? 'selected' : ''}>Customer</option>
@@ -184,7 +184,7 @@
 					                        </div>
 					
 					                        <div class="col-md-6 mb-3">
-					                            <p class="text-muted m-0">Status</p>
+					                            <label>Status</label>
 					                            <select name="active" class="form-control bg-dark text-white border-0">
 					                                <option value="true" ${sessionScope.user.active ? 'selected' : ''}>Active</option>
 					                                <option value="false" ${!sessionScope.user.active ? 'selected' : ''}>Inactive</option>
@@ -204,7 +204,7 @@
 
 
                     <!-- Footer Start -->
-                    <jsp:include page="UserFooter.jsp"></jsp:include>
+                    <jsp:include page="Footer.jsp"></jsp:include>
 
                     <!-- Template Javascript -->
                     <script src="js/usermain.js"></script>

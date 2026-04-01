@@ -1,35 +1,70 @@
 package com.grownited.controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.cloudinary.Cloudinary;
 import com.grownited.entity.userEntity;
 import com.grownited.repository.UserRepository;
+import com.grownited.service.MailService;
 @Controller
 public class UserController {
 	
 	@Autowired
 	UserRepository userRepository;
 	
+	@Autowired
+	MailService mailService;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	Cloudinary cloudinary;
+	
 	@GetMapping(value =  {"user"})
 	public String user() {
 		return "User"; //jsp name
 	}
 	
-	@PostMapping("addUser")
-	public String register(userEntity userEntity) {
-		userEntity.setRole("Customer");
+	@PostMapping("addUserAdmin")
+	public String register(userEntity userEntity,MultipartFile profilePic) {
 		userEntity.setActive(true);
 		userEntity.setCreatedAt(LocalDate.now());
 		
+		String encodedPasswordString = passwordEncoder.encode(userEntity.getPassword());
+		userEntity.setPassword(encodedPasswordString);
+		
+		try {
+			Map  map = 	cloudinary.uploader().upload(profilePic.getBytes(), null);
+			String profilePicURL = map.get("secure_url").toString();
+			System.out.println(profilePicURL);
+			userEntity.setProfilePicURL(profilePicURL);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		userRepository.save(userEntity);
+		
+		if ("ADMIN".equalsIgnoreCase(userEntity.getRole())) {
+	        mailService.sendAdminWelcomeMail(userEntity);
+	    } else {
+	        mailService.sendUserWelcomeMail(userEntity);
+	    }
+		
 		return "redirect:/userList";
 	}
 	@GetMapping(value = {"userList"})

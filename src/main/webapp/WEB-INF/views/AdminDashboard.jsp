@@ -74,45 +74,45 @@
 
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-line fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Total Income</p>
-								<h5 class="mb-0">${totalIncome}</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                            <div class="ms-3">
-								<p class="mb-2">Total Expense</p>
-								<h5 class="mb-0">${totalExpense}</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-area fa-3x text-primary"></i>
-                            <div class="ms-3">
-								<p class="mb-2">Net Profit</p>
-								<h5 class="mb-0">${netProfit}</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                            <div class="ms-3">
-								<p class="mb-2">Today Expense</p>
-								<h5 class="mb-0">${todayExpense}</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+		                <div class="row g-4">
+		                    <div class="col-sm-6 col-xl-3">
+		                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+		                            <i class="fa fa-chart-line fa-3x text-primary"></i>
+		                            <div class="ms-3">
+		                                <p class="mb-2">This Month Income</p>
+										<h5 class="mb-0">${thisMonthIncome}</h5>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-sm-6 col-xl-3">
+		                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+		                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+		                            <div class="ms-3">
+										<p class="mb-2">Quarter Income</p>
+										<h5 class="mb-0">${qtrIncome}</h5>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-sm-6 col-xl-3">
+		                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+		                            <i class="fa fa-chart-area fa-3x text-primary"></i>
+		                            <div class="ms-3">
+										<p class="mb-2">This Month Expense</p>
+										<h5 class="mb-0">${thisMonthExpense}</h5>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-sm-6 col-xl-3">
+		                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+		                            <i class="fa fa-chart-pie fa-3x text-primary"></i>
+		                            <div class="ms-3">
+										<p class="mb-2">Quarter Expense</p>
+										<h5 class="mb-0">${qtrExpense}</h5>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
             <!-- Sale & Revenue End -->
 
 

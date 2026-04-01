@@ -34,8 +34,12 @@ public class UserService {
             user.setOtpGeneratedTime(LocalDateTime.now());
 
             userRepository.save(user);
-
-            mailService.sendResetOtpMail(user, otp);
+            
+            if ("ADMIN".equalsIgnoreCase(user.getRole())) {
+    	        mailService.sendAdminResetOtpMail(user,otp);
+    	    } else {
+    	        mailService.sendUserResetOtpMail(user,otp);
+    	    }
         }
     }
 

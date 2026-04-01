@@ -149,8 +149,8 @@
 
                 <!-- Buttons -->
                 <div class="d-flex justify-content-end mt-4">
-                    <a href="/user/expenseList" class="btn btn-dark me-2">Back</a>
-                    <a href="/user/editExpense?expenseId=${expense.expenseId}" class="btn btn-warning">Edit</a>
+                    <a href="/userExpenseList" class="btn btn-dark me-2">Back</a>
+                    <a href="/userEditExpense?expenseId=${expense.expenseId}" class="btn btn-warning">Edit</a>
                 </div>
 
             </div>

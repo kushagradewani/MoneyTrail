@@ -1,6 +1,7 @@
 package com.grownited.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,10 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.grownited.entity.AccountEntity;
 import com.grownited.entity.IncomeEntity;
 import com.grownited.entity.StatusEntity;
+import com.grownited.entity.userEntity;
 import com.grownited.repository.AccountRepository;
 import com.grownited.repository.IncomeRepository;
 import com.grownited.repository.StatusRepository;
 
+import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
+
+@Transactional
 @Controller
 public class IncomeController {
 	
@@ -40,12 +46,32 @@ public class IncomeController {
 	}
 	
 	@PostMapping("saveIncome")
-	public String saveExpense(IncomeEntity incomeEntity) {
+	public String saveExpense(IncomeEntity incomeEntity,HttpSession session) {
 
+		userEntity loggedUser = (userEntity) session.getAttribute("user");
+        if (loggedUser == null) return "redirect:/login";
+
+        incomeEntity.setUserId(loggedUser.getUserId()); // link income to user
+		
 		incomeEntity.setActive(true);
 		
 	    incomeEntity.setInaccountId(incomeEntity.getInaccountId());
 	    incomeEntity.setStatusId(incomeEntity.getStatusId());
+	    
+	    // Fetch account
+	    Optional<AccountEntity> opAccount = accountRepository.findById(incomeEntity.getInaccountId());
+
+	    if (opAccount.isPresent()) {
+	        AccountEntity account = opAccount.get();
+
+	        // Debug (optional)
+	        System.out.println("Income added to: " + account.getTitle());
+
+	        // Add amount
+	        account.setAmount(account.getAmount() + incomeEntity.getAmount());
+
+	        accountRepository.save(account);
+	    }
 
 	    incomeRepository.save(incomeEntity);
 
@@ -53,16 +79,16 @@ public class IncomeController {
 	}
 	
 	@GetMapping(value = {"incomeList"})
-	public String expenseList(Model model) {
-		
-		List<IncomeEntity> incomeList = incomeRepository.findAll();
-		model.addAttribute("incomeList", incomeList);
+	public String expenseList(Model model, HttpSession session) {
+        userEntity loggedUser = (userEntity) session.getAttribute("user");
+        if (loggedUser == null) return "redirect:/login";
 
-	    List<AccountEntity> accountList = accountRepository.findAll();
-	    model.addAttribute("accountList", accountList);
-	    
-	    List<StatusEntity> statusList = statusRepository.findAll();
-	    model.addAttribute("statusList", statusList);
+        List<IncomeEntity> incomeList = incomeRepository.findByUserId(loggedUser.getUserId());
+
+        model.addAttribute("incomeList", safeList(incomeList));
+        model.addAttribute("accountList", safeList(accountRepository.findAll()));
+        model.addAttribute("statusList", safeList(statusRepository.findAll()));
+        model.addAttribute("user", loggedUser);
 
 	    return "IncomeList";
 	}
@@ -168,5 +194,9 @@ public class IncomeController {
 
 	    return "redirect:/incomeList";
 	}
+	
+	private <T> List<T> safeList(List<T> list) {
+        return list != null ? list : new ArrayList<>();
+    }
 
 }

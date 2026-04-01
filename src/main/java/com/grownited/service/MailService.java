@@ -40,7 +40,7 @@ public class MailService {
 //		
 //	}
 	
-	public void sendWelcomeMail(userEntity user) {
+	public void sendAdminWelcomeMail(userEntity user) {
 		
 		MimeMessage message = javaMailSender.createMimeMessage();
 		
@@ -74,8 +74,42 @@ public class MailService {
 		
 	}
 	
+	public void sendUserWelcomeMail(userEntity user) {
+		
+		MimeMessage message = javaMailSender.createMimeMessage();
+		
+		Resource resource = resourceLoader.getResource("classpath:templates/UserWelcomeMailTemplate.html");
+		
+		try {
+			
+			String html = new String(resource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+			
+			MimeMessageHelper helper;
+			
+
+			String body = html
+			        .replace("${name}", user.getFirstName())
+			        .replace("${email}", user.getEmail())
+			        .replace("${loginLink}", "http://localhost:9898/login")
+			        .replace("${companyName}", "Money Trail");
+			
+			
+			helper = new MimeMessageHelper(message,true);
+			helper.setFrom("moneytrailowner@gmail.com");
+			helper.setTo(user.getEmail());
+			helper.setSubject("Money Trail - Welcome To Our Application");
+			helper.setText(body,true);
+			
+			javaMailSender.send(message);
+		}catch (MessagingException | IOException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+	}
 	
-	public void sendResetOtpMail(userEntity user, String otp) {
+	
+	public void sendAdminResetOtpMail(userEntity user, String otp) {
 
 	    try {
 	        MimeMessage message = javaMailSender.createMimeMessage();
@@ -99,14 +133,68 @@ public class MailService {
 	        e.printStackTrace();
 	    }
 	}
+	
+	public void sendUserResetOtpMail(userEntity user, String otp) {
 
-	public void sendPasswordSuccessMail(userEntity user) {
+	    try {
+	        MimeMessage message = javaMailSender.createMimeMessage();
+	        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+	        Resource resource = resourceLoader.getResource("classpath:templates/UserResetPasswordOTP.html");
+	        String html = new String(resource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+
+	        String body = html
+	                .replace("${fullName}", user.getFirstName())
+	                .replace("${otp}", otp);
+
+	        helper.setFrom("moneytrailowner@gmail.com");
+	        helper.setTo(user.getEmail());
+	        helper.setSubject("Money Trail - Password Reset OTP");
+	        helper.setText(body, true);
+
+	        javaMailSender.send(message);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	public void sendAdminPasswordSuccessMail(userEntity user) {
 
 	    try {
 	        MimeMessage message = javaMailSender.createMimeMessage();
 	        MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
 	        Resource resource = resourceLoader.getResource("classpath:templates/PasswordResetSuccess.html");
+	        String html = new String(resource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+	        
+	        String dateTime = LocalDateTime.now()
+	                .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+
+	        String body = html
+	                .replace("${fullName}", user.getFirstName())
+	                .replace("${loginLink}", "http://localhost:9898/login")
+	                .replace("${dateTime}", dateTime);
+
+	        helper.setFrom("moneytrailowner@gmail.com");
+	        helper.setTo(user.getEmail());
+	        helper.setSubject("Money Trail - Password Changed Successfully");
+	        helper.setText(body, true);   // use body (with replacements)
+
+	        javaMailSender.send(message);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public void sendUserPasswordSuccessMail(userEntity user) {
+
+	    try {
+	        MimeMessage message = javaMailSender.createMimeMessage();
+	        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+	        Resource resource = resourceLoader.getResource("classpath:templates/UserPasswordResetSuccess.html");
 	        String html = new String(resource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
 	        
 	        String dateTime = LocalDateTime.now()

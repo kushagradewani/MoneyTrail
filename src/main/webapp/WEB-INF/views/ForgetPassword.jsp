@@ -9,12 +9,12 @@
     <title>Forgot Password</title>
 
     <!-- Bootstrap CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/userbootstrap.min.css" rel="stylesheet">
+    <link href="css/userstyle.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <style>
-        body {
+/*         body {
             background: #000000;
         }
 
@@ -51,7 +51,7 @@
         .message {
             font-size: 13px;
             margin-top: 5px;
-        }
+        } */
     </style>
 </head>
 

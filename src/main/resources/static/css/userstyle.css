@@ -6,6 +6,28 @@
     --dark: #000000;
 } 
 
+
+/* Ensure sidebar visible by default */
+.sidebar {
+    width: 250px;
+    transition: 0.3s;
+}
+
+/* Content spacing */
+.content {
+    margin-left: 250px;
+    transition: 0.3s;
+}
+
+/* Template toggle class (IMPORTANT) */
+.sidebar.open {
+    margin-left: -250px;
+}
+
+.content.open {
+    margin-left: 0;
+}
+
 .back-to-top {
     position: fixed;
     display: none;

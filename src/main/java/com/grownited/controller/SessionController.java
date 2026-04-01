@@ -53,32 +53,108 @@ public class SessionController {
 		return "SignUp"; //jsp name
 	}
 	
+	 // =========================
+    // 👉 OPEN PROFILE PAGE
+    // =========================
+    @GetMapping("/adminProfile")
+    public String adminProfile(HttpSession session, Model model) {
+
+        userEntity user = (userEntity) session.getAttribute("user");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        // fresh data from DB (important)
+        Optional<userEntity> op = userRepository.findById(user.getUserId());
+
+        if (op.isPresent()) {
+            session.setAttribute("user", op.get());
+        }
+
+        return "AdminProfile"; // JSP name
+    }
+
+    // =========================
+    // 👉 UPDATE PROFILE
+    // =========================
+    @PostMapping("/updateAdmin")
+    public String updateUser(userEntity User,MultipartFile profilePic,
+                             HttpSession session) throws IOException {
+
+    	userEntity sessionUser = (userEntity) session.getAttribute("user");
+
+        if (sessionUser == null) {
+            return "redirect:/login";
+        }
+
+        // Fetch original user from DB
+        userEntity dbUser = userRepository.findById(sessionUser.getUserId()).get();
+
+        // ===== Update Fields =====
+        dbUser.setFirstName(User.getFirstName());
+        dbUser.setLastName(User.getLastName());
+        dbUser.setEmail(User.getEmail());
+        dbUser.setGender(User.getGender());
+        dbUser.setBirthYear(User.getBirthYear());
+        dbUser.setContactNum(User.getContactNum());
+
+        // ===== Handle Image Upload =====
+        try {
+			Map  map = 	cloudinary.uploader().upload(profilePic.getBytes(), null);
+			String profilePicURL = map.get("secure_url").toString();
+			System.out.println(profilePicURL);
+			dbUser.setProfilePicURL(profilePicURL);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        // Save updated user
+        userRepository.save(dbUser);
+
+        // Update session
+        session.setAttribute("user", dbUser);
+
+        return "redirect:/adminProfile";
+    }
+	
 	@GetMapping("/Home")
-	public String openHome(Model model) {
-		Double totalIncome = incomeRepository.totalIncome();
-	    totalIncome = totalIncome == null ? 0 : totalIncome;
+	public String openHome(Model model, HttpSession session) {
 
-	    Double totalExpense = expenseRepository.totalExpense();
-	    totalExpense = totalExpense == null ? 0 : totalExpense;
+	    // Get the logged-in user from session
+	    userEntity loggedUser = (userEntity) session.getAttribute("user");
+	    if (loggedUser == null) {
+	        return "redirect:/login";
+	    }
+	    Integer userId = loggedUser.getUserId();
 
-	    Double todayExpense = expenseRepository.todayExpense();
-	    todayExpense = todayExpense == null ? 0 : todayExpense;
+	    // ================== Calculate amounts ==================
+	    // This month
+	    Double thisMonthIncome = incomeRepository.totalIncomeByUserAndMonth(userId, LocalDate.now().getMonthValue(), LocalDate.now().getYear());
+	    thisMonthIncome = thisMonthIncome == null ? 0 : thisMonthIncome;
 
-	    Double netProfit = totalIncome - totalExpense;
+	    Double thisMonthExpense = expenseRepository.totalExpenseByUserAndMonth(userId, LocalDate.now().getMonthValue(), LocalDate.now().getYear());
+	    thisMonthExpense = thisMonthExpense == null ? 0 : thisMonthExpense;
 
-	    model.addAttribute("totalIncome",
-	        String.format("%.1f", totalIncome / 1000) + "k");
+	    // This quarter
+	    int currentQuarter = (LocalDate.now().getMonthValue() - 1) / 3 + 1;
+	    Double qtrIncome = incomeRepository.totalIncomeByUserAndQuarter(userId, currentQuarter, LocalDate.now().getYear());
+	    qtrIncome = qtrIncome == null ? 0 : qtrIncome;
 
-	    model.addAttribute("totalExpense",
-	        String.format("%.1f", totalExpense / 1000) + "k");
+	    Double qtrExpense = expenseRepository.totalExpenseByUserAndQuarter(userId, currentQuarter, LocalDate.now().getYear());
+	    qtrExpense = qtrExpense == null ? 0 : qtrExpense;
 
-	    model.addAttribute("netProfit",
-	        String.format("%.1f", netProfit / 1000) + "k");
+	    // ================== Add to model ==================
+	    model.addAttribute("thisMonthIncome", String.format("%.1f", thisMonthIncome / 1000) + "k");
+	    model.addAttribute("thisMonthExpense", String.format("%.1f", thisMonthExpense / 1000) + "k");
+	    model.addAttribute("qtrIncome", String.format("%.1f", qtrIncome / 1000) + "k");
+	    model.addAttribute("qtrExpense", String.format("%.1f", qtrExpense / 1000) + "k");
 
-	    model.addAttribute("todayExpense",
-	        String.format("%.1f", todayExpense / 1000) + "k");
 	    model.addAttribute("pageTitle", "Home");
 	    model.addAttribute("activePage", "dashboard");
+
 	    return "USER/UserHome";
 	}
 	
@@ -146,7 +222,12 @@ public class SessionController {
 
             userRepository.save(user);
 
-            mailService.sendPasswordSuccessMail(user);
+            if ("ADMIN".equalsIgnoreCase(user.getRole())) {
+    	        mailService.sendAdminPasswordSuccessMail(user);
+    	    } else {
+    	        mailService.sendUserPasswordSuccessMail(user);
+    	    }
+    		
         }
 
         return "Login";
@@ -220,7 +301,7 @@ public class SessionController {
 		userRepository.save(userEntity);
 		
 		//Welcome mail Sender
-		mailService.sendWelcomeMail(userEntity);
+		mailService.sendUserWelcomeMail(userEntity);
 
 		return "Login";
 	}

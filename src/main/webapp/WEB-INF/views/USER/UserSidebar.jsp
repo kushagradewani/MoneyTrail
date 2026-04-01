@@ -46,7 +46,7 @@
 							${sessionScope.user.lastName}
 						</h6>
 
-						<span>${sessionScope.user.role}</span>
+						<p class="text-muted m-0"><span>${sessionScope.user.role}</span></p>
 					</c:when>
 
 					<c:otherwise>
@@ -116,7 +116,7 @@
 						Add New Category
 					</a> --%>
 
-					<a href="/usercategoryList"
+					<a href="/userCategoryList"
 						class="dropdown-item ${activePage=='categoryList'?'active':''}">
 						View List Category
 					</a>
@@ -144,7 +144,7 @@
 						Add New Sub Category
 					</a> --%>
 
-					<a href="/user/subCategoryList"
+					<a href="/userSubCategoryList"
 						class="dropdown-item ${activePage=='subCategoryList'?'active':''}">
 						View List Sub Category
 					</a>
@@ -172,7 +172,7 @@
 						Add New Vender
 					</a> --%>
 
-					<a href="/user/venderList"
+					<a href="/userVenderList"
 						class="dropdown-item ${activePage=='venderList'?'active':''}">
 						View List Vender
 					</a>
@@ -195,12 +195,12 @@
 
 				<div class="dropdown-menu bg-transparent border-0">
 
-					<a href="/user/account"
+					<a href="/userAccount"
 						class="dropdown-item ${activePage=='account'?'active':''}">
 						Add New Account
 					</a>
 
-					<a href="/user/accountList"
+					<a href="/userAccountList"
 						class="dropdown-item ${activePage=='accountList'?'active':''}">
 						View List Account
 					</a>
@@ -224,12 +224,12 @@
 
 				<div class="dropdown-menu bg-transparent border-0">
 
-					<a href="/user/expense"
+					<a href="/userExpense"
 						class="dropdown-item ${activePage=='expense'?'active':''}">
 						Add New Expense
 					</a>
 
-					<a href="/user/expenseList"
+					<a href="/userExpenseList"
 						class="dropdown-item ${activePage=='expenseList'?'active':''}">
 						View List Expense
 					</a>
@@ -253,12 +253,12 @@
 
 				<div class="dropdown-menu bg-transparent border-0">
 
-					<a href="/user/income"
+					<a href="/userIncome"
 						class="dropdown-item ${activePage=='income'?'active':''}">
 						Add New Income
 					</a>
 
-					<a href="i/user/ncomeList"
+					<a href="/userIncomeList"
 						class="dropdown-item ${activePage=='incomeList'?'active':''}">
 						View List Income
 					</a>

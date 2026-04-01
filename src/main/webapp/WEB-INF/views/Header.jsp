@@ -1,118 +1,116 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
- 
+    pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!-- Navbar Start -->
-            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
-                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
-                    <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
-                </a>
-                <a href="#" class="sidebar-toggler flex-shrink-0">
-                    <i class="fa fa-bars"></i>
-                </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control bg-dark border-0" type="search" placeholder="Search">
-                </form>
-                <div class="navbar-nav align-items-center ms-auto">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-envelope me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Message</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all message</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notificatin</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Profile updated</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">New user added</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Password changed</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all notifications</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-	                        <c:choose>
-							    <c:when test="${not empty sessionScope.user.profilePicURL}">
-							        <img class="rounded-circle me-lg-2"
-							             src="${sessionScope.user.profilePicURL}"
-							             alt="Profile"
-							             style="width: 40px; height: 40px;">
-							    </c:when>
-							    <c:otherwise>
-							        <img class="rounded-circle me-lg-2"
-							             src="${pageContext.request.contextPath}/img/user.jpg"
-							             alt="Profile"
-							             style="width: 40px; height: 40px;">
-							    </c:otherwise>
-							</c:choose>
 
-                            <c:choose>
-							    <c:when test="${not empty sessionScope.user}">
-							        <span class="mb-0">
-							            ${sessionScope.user.firstName}
-							        </span>
-							    </c:when>
-							
-							    <c:otherwise>
-							        <span class="mb-0">Guest User</span>
-							    </c:otherwise>
-							</c:choose>
+<!DOCTYPE html>
+<html lang="en">
 
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Settings</a>
-                            <a href="logout" class="dropdown-item">Log Out</a>
-                        </div>
+<head>
+    <meta charset="utf-8">
+    <title>Admin Header</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Favicon -->
+    <link href="${pageContext.request.contextPath}/img/favicon.ico" rel="icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR START ================= -->
+<nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+
+    <!-- Logo -->
+    <a href="#" class="navbar-brand d-flex d-lg-none me-4">
+        <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+    </a>
+
+    <!-- Sidebar Toggle -->
+    <a href="#" class="sidebar-toggler flex-shrink-0">
+        <i class="fa fa-bars"></i>
+    </a>
+
+    <!-- Search -->
+    <form class="d-none d-md-flex ms-4">
+        <input class="form-control bg-dark border-0" type="search" placeholder="Search">
+    </form>
+
+    <!-- Right Menu -->
+    <div class="navbar-nav align-items-center ms-auto">
+
+        <!-- Messages -->
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="fa fa-envelope me-lg-2"></i>
+                <span class="d-none d-lg-inline-flex">Message</span>
+            </a>
+        </div>
+
+        <!-- Notifications -->
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="fa fa-bell me-lg-2"></i>
+                <span class="d-none d-lg-inline-flex">Notification</span>
+            </a>
+        </div>
+
+        <c:choose>
+
+            <%-- ================= USER LOGGED IN ================= --%>
+            <c:when test="${not empty sessionScope.user}">
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+
+                        <%-- Profile Image --%>
+                        <c:choose>
+                            <c:when test="${not empty sessionScope.user.profilePicURL}">
+                                <img class="rounded-circle me-2"
+                                     src="${sessionScope.user.profilePicURL}"
+                                     style="width: 40px; height: 40px;">
+                            </c:when>
+                            <c:otherwise>
+                                <img class="rounded-circle me-2"
+                                     src="${pageContext.request.contextPath}/img/user.jpg"
+                                     style="width: 40px; height: 40px;">
+                            </c:otherwise>
+                        </c:choose>
+
+                        <%-- User Name --%>
+                        <span>${sessionScope.user.firstName}</span>
+                    </a>
+
+                    <%-- Dropdown --%>
+                    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                        <a href="${pageContext.request.contextPath}/adminProfile" class="dropdown-item">My Profile</a>
+                        <a href="#" class="dropdown-item">Settings</a>
+                        <a href="${pageContext.request.contextPath}/logout" class="dropdown-item">Log Out</a>
                     </div>
                 </div>
-            </nav>
-            <!-- Navbar End -->
+            </c:when>
+
+            <%-- ================= USER NOT LOGGED IN ================= --%>
+            <c:otherwise>
+                <a href="${pageContext.request.contextPath}/login" class="btn btn-primary ms-3">
+                    Login
+                </a>
+            </c:otherwise>
+
+        </c:choose>
+
+    </div>
+</nav>
+<!-- ================= NAVBAR END ================= -->
+
+</body>
+</html>

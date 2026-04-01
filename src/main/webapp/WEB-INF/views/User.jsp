@@ -69,7 +69,7 @@
 			
 			        <h3>Create Account ✨</h3>
 
-			        <form action="addUser" method="post">
+			        <form action="addUserAdmin" method="post" enctype="multipart/form-data">
 			
 			            <!-- Name -->
 			            <div class="row">
@@ -128,8 +128,17 @@
 			            <!-- Profile Pic -->
 			            <div class="mb-4">
 			                <label>Profile Picture</label>
-			                <input type="file" name="profilePicURL" class="form-control">
+			                <input type="file" name="profilePic" class="form-control">
 			            </div>
+			            
+			            <div class="col-md-6 mb-3">
+					        <p class="text-muted m-0">Role</p>
+					        <select name="role" class="form-control bg-dark text-white border-0" required>
+							    <option value="">-- Select Role --</option>
+							    <option value="USER">User</option>
+							    <option value="ADMIN">Admin</option>
+							</select>
+					    </div>
 			
 			            <!-- Button -->
 			            <button type="submit" class="btn btn-primary col-md-12">

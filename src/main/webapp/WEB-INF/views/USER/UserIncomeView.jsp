@@ -146,8 +146,8 @@
 
 				<!-- Buttons -->
 				<div class="d-flex justify-content-end mt-4">
-					<a href="/user/incomeList" class="btn btn-dark me-2">Back</a>
-					<a href="/user/editIncome?incomeId=${income.incomeId}"
+					<a href="/userIncomeList" class="btn btn-dark me-2">Back</a>
+					<a href="/userEditIncome?incomeId=${income.incomeId}"
 						class="btn btn-warning">Edit</a>
 				</div>
 

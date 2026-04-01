@@ -57,7 +57,7 @@
             <div class="bg-secondary rounded p-4">
                 <h3 class="text-white mb-4">Edit Expense</h3>
 
-                <form action="/user/updateExpense" method="post">
+                <form action="/userUpdateExpense" method="post">
                     <input type="hidden" name="expenseId" value="${expense.expenseId}" />
 
                     <div class="mb-3">
@@ -147,7 +147,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end">
-                        <a href="/user/expenseList" class="btn btn-dark me-2">Back</a>
+                        <a href="/userExpenseList" class="btn btn-dark me-2">Back</a>
                         <button type="submit" class="btn btn-success">Update Expense</button>
                     </div>
                 </form>

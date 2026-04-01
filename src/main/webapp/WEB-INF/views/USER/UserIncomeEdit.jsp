@@ -49,7 +49,7 @@
             <div class="bg-secondary rounded p-4">
                 <h3 class="text-white mb-4">Edit Income</h3>
 
-                <form action="/user/updateIncome" method="post">
+                <form action="/userUpdateIncome" method="post">
                     <input type="hidden" name="incomeId" value="${income.incomeId}" />
 
                     <div class="mb-3">
@@ -103,7 +103,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end">
-                        <a href="/user/incomeList" class="btn btn-dark me-2">Back</a>
+                        <a href="/userIncomeList" class="btn btn-dark me-2">Back</a>
                         <button type="submit" class="btn btn-success">Update Income</button>
                     </div>
                 </form>

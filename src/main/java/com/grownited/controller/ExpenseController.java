@@ -1,6 +1,7 @@
 package com.grownited.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ import com.grownited.entity.ExpenseEntity;
 import com.grownited.entity.StatusEntity;
 import com.grownited.entity.SubCategoryEntity;
 import com.grownited.entity.VenderEntity;
+import com.grownited.entity.userEntity;
 import com.grownited.repository.AccountRepository;
 import com.grownited.repository.CategoryRepository;
 import com.grownited.repository.ExpenseRepository;
@@ -23,6 +25,10 @@ import com.grownited.repository.StatusRepository;
 import com.grownited.repository.SubCategoryRepository;
 import com.grownited.repository.VenderRepository;
 
+import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
+
+@Transactional
 @Controller
 public class ExpenseController {
 	
@@ -62,40 +68,66 @@ public class ExpenseController {
 	}
 
 	@PostMapping("saveExpense")
-	public String saveExpense(ExpenseEntity expenseEntity) {
+	public String saveExpense(ExpenseEntity expenseEntity,HttpSession session) {
 
-	    expenseEntity.setActive(true);
+		userEntity loggedInUser = (userEntity) session.getAttribute("user");
+        if (loggedInUser == null) return "redirect:/login";
+
+        expenseEntity.setActive(true);
+        expenseEntity.setUserId(loggedInUser.getUserId());
 
 	    expenseEntity.setCategoryId(expenseEntity.getCategoryId());
 	    expenseEntity.setSubCategoryId(expenseEntity.getSubCategoryId());
 	    expenseEntity.setVenderId(expenseEntity.getVenderId());
 	    expenseEntity.setInaccountId(expenseEntity.getInaccountId());
 	    expenseEntity.setStatusId(expenseEntity.getStatusId());
+	    
+	    // Fetch account
+	    Optional<AccountEntity> opAccount = accountRepository.findById(expenseEntity.getInaccountId());
+
+	    if (opAccount.isPresent()) {
+	        AccountEntity account = opAccount.get();
+
+	        // Debug (optional)
+	        System.out.println("Expense from: " + account.getTitle());
+
+	        // 🔴 Balance check (IMPORTANT)
+	        if (account.getAmount() >= expenseEntity.getAmount()) {
+	            account.setAmount(account.getAmount() - expenseEntity.getAmount());
+	            accountRepository.save(account);
+	        } else {
+	            System.out.println("Insufficient balance in " + account.getTitle());
+	            return "redirect:/expense?error=insufficient";
+	        }
+	    }
 
 	    expenseRepository.save(expenseEntity);
 
 	    return "redirect:/expenseList";
 	}
 	@GetMapping(value = {"expenseList"})
-	public String expenseList(Model model) {
+	public String expenseList(Model model,HttpSession session) {
 
-	    List<CategoryEntity> categoryList = categoryRepository.findAll();
-	    model.addAttribute("categoryList", categoryList);
+		// 1️⃣ Get logged-in user from session
+        userEntity loggedInUser = (userEntity) session.getAttribute("user");
+        if (loggedInUser == null) {
+            return "redirect:/login"; // user not logged in
+        }
 
-	    List<SubCategoryEntity> subCategoryList = subCategoryRepository.findAll();
-	    model.addAttribute("subCategoryList", subCategoryList);
+        Integer userId = loggedInUser.getUserId();
 
-	    List<VenderEntity> venderList = venderRepository.findAll();
-	    model.addAttribute("venderList", venderList);
+        // 2️⃣ Fetch user-specific expenses
+        List<ExpenseEntity> expenses = expenseRepository.findByUserId(userId);
+        if (expenses == null) expenses = new ArrayList<ExpenseEntity>();
 
-	    List<AccountEntity> accountList = accountRepository.findAll();
-	    model.addAttribute("accountList", accountList);
+        // 3️⃣ Fetch statuses for mapping statusId -> status
+        List<StatusEntity> statusList = statusRepository.findAll();
+        if (statusList == null) statusList = new ArrayList<StatusEntity>();
 
-	    List<ExpenseEntity> expenseList = expenseRepository.findAll();
-	    model.addAttribute("expenseList", expenseList);
-	    
-	    List<StatusEntity> statusList = statusRepository.findAll();
-	    model.addAttribute("statusList", statusList);
+        // 4️⃣ Add to model
+        model.addAttribute("expenseList", expenses);
+        model.addAttribute("statusList", statusList);
+        model.addAttribute("user", loggedInUser);
 
 	    return "ExpenseList";
 	}

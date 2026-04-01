@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end">
-                        <a href="/user/accountList" class="btn btn-dark me-2">Back</a>
+                        <a href="/userAccountList" class="btn btn-dark me-2">Back</a>
                         <button type="submit" class="btn btn-success">Update Account</button>
                     </div>
                 </form>
