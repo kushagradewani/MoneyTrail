@@ -24,6 +24,12 @@
     <!-- CSS -->
     <link href="css/userbootstrap.min.css" rel="stylesheet">
     <link href="css/userstyle.css" rel="stylesheet">
+    
+    <!-- DataTables Core CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/2.3.7/css/dataTables.dataTables.css">
+
+<!-- DataTables Buttons CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.2.6/css/buttons.dataTables.css">
 </head>
 
 <body>

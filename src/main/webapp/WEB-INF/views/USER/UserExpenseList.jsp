@@ -53,7 +53,7 @@
 					</div>
 
 					<div class="table-responsive">
-						<table class="table table-bordered table-striped text-white">
+						<table id="first" class="table table-bordered table-striped text-white">
 							<thead>
 								<tr>
 									<th>#</th>
@@ -66,6 +66,7 @@
 									<th>Amount</th>
 									<th>Date</th>
 									<th>Action</th>
+									<th>View</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -152,4 +153,13 @@
 	</a>
 
 </body>
+<script>
+new DataTable('#first', {
+    layout: {
+        topStart: {
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        }
+    }
+});
+	</script>
 </html>

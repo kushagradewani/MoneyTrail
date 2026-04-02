@@ -31,7 +31,7 @@
             <div class="bg-secondary rounded p-4">
                 <h3 class="text-white mb-4">Edit Account</h3>
 
-                <form action="updateAccount" method="post">
+                <form action="userUpdateAccount" method="post">
                     <input type="hidden" name="inaccountId" value="${account.inaccountId}" />
 
                     <div class="mb-3">

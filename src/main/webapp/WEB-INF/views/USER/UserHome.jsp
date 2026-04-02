@@ -122,226 +122,27 @@
                             <div class="col-sm-12 col-xl-6">
                                 <div class="bg-secondary text-center rounded p-4">
                                     <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <h6 class="mb-0">Worldwide Sales</h6>
+                                        <h6 class="mb-0">Total Expense & Income</h6>
                                         <a href="">Show All</a>
                                     </div>
-                                    <canvas id="worldwide-sales"></canvas>
+                                    <%-- <canvas id="expenseChart" width="400" height="200"></canvas> --%>
+                                    <%-- <canvas id="worldwide-sales"></canvas> --%>
+                                    <canvas id="barChart"></canvas>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-xl-6">
                                 <div class="bg-secondary text-center rounded p-4">
                                     <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <h6 class="mb-0">Salse & Revenue</h6>
+                                        <h6 class="mb-0">Total Expense By Category</h6>
                                         <a href="">Show All</a>
                                     </div>
-                                    <canvas id="salse-revenue"></canvas>
+                                    <%-- <canvas id="salse-revenue"></canvas> --%>
+                                    <canvas id="lineChart"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Sales Chart End -->
-
-
-                    <!-- Recent Sales Start -->
-                    <div class="container-fluid pt-4 px-4">
-                        <div class="bg-secondary text-center rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">Recent Salse</h6>
-                                <a href="">Show All</a>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                    <thead>
-                                        <tr class="text-white">
-                                            <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Invoice</th>
-                                            <th scope="col">Customer</th>
-                                            <th scope="col">Amount</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><input class="form-check-input" type="checkbox"></td>
-                                            <td>01 Jan 2045</td>
-                                            <td>INV-0123</td>
-                                            <td>Jhon Doe</td>
-                                            <td>$123</td>
-                                            <td>Paid</td>
-                                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input class="form-check-input" type="checkbox"></td>
-                                            <td>01 Jan 2045</td>
-                                            <td>INV-0123</td>
-                                            <td>Jhon Doe</td>
-                                            <td>$123</td>
-                                            <td>Paid</td>
-                                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input class="form-check-input" type="checkbox"></td>
-                                            <td>01 Jan 2045</td>
-                                            <td>INV-0123</td>
-                                            <td>Jhon Doe</td>
-                                            <td>$123</td>
-                                            <td>Paid</td>
-                                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input class="form-check-input" type="checkbox"></td>
-                                            <td>01 Jan 2045</td>
-                                            <td>INV-0123</td>
-                                            <td>Jhon Doe</td>
-                                            <td>$123</td>
-                                            <td>Paid</td>
-                                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input class="form-check-input" type="checkbox"></td>
-                                            <td>01 Jan 2045</td>
-                                            <td>INV-0123</td>
-                                            <td>Jhon Doe</td>
-                                            <td>$123</td>
-                                            <td>Paid</td>
-                                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Recent Sales End -->
-
-
-                    <!-- Widgets Start -->
-                    <div class="container-fluid pt-4 px-4">
-                        <div class="row g-4">
-                            <div class="col-sm-12 col-md-6 col-xl-4">
-                                <div class="h-100 bg-secondary rounded p-4">
-                                    <div class="d-flex align-items-center justify-content-between mb-2">
-                                        <h6 class="mb-0">Messages</h6>
-                                        <a href="">Show All</a>
-                                    </div>
-                                    <div class="d-flex align-items-center border-bottom py-3">
-                                        <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt=""
-                                            style="width: 40px; height: 40px;">
-                                        <div class="w-100 ms-3">
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <h6 class="mb-0">Jhon Doe</h6>
-                                                <small>15 minutes ago</small>
-                                            </div>
-                                            <span>Short message goes here...</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center border-bottom py-3">
-                                        <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt=""
-                                            style="width: 40px; height: 40px;">
-                                        <div class="w-100 ms-3">
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <h6 class="mb-0">Jhon Doe</h6>
-                                                <small>15 minutes ago</small>
-                                            </div>
-                                            <span>Short message goes here...</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center border-bottom py-3">
-                                        <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt=""
-                                            style="width: 40px; height: 40px;">
-                                        <div class="w-100 ms-3">
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <h6 class="mb-0">Jhon Doe</h6>
-                                                <small>15 minutes ago</small>
-                                            </div>
-                                            <span>Short message goes here...</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center pt-3">
-                                        <img class="rounded-circle flex-shrink-0" src="img/user.jpg" alt=""
-                                            style="width: 40px; height: 40px;">
-                                        <div class="w-100 ms-3">
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <h6 class="mb-0">Jhon Doe</h6>
-                                                <small>15 minutes ago</small>
-                                            </div>
-                                            <span>Short message goes here...</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6 col-xl-4">
-                                <div class="h-100 bg-secondary rounded p-4">
-                                    <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <h6 class="mb-0">Calender</h6>
-                                        <a href="">Show All</a>
-                                    </div>
-                                    <div id="calender"></div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6 col-xl-4">
-                                <div class="h-100 bg-secondary rounded p-4">
-                                    <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <h6 class="mb-0">To Do List</h6>
-                                        <a href="">Show All</a>
-                                    </div>
-                                    <div class="d-flex mb-2">
-                                        <input class="form-control bg-dark border-0" type="text"
-                                            placeholder="Enter task">
-                                        <button type="button" class="btn btn-primary ms-2">Add</button>
-                                    </div>
-                                    <div class="d-flex align-items-center border-bottom py-2">
-                                        <input class="form-check-input m-0" type="checkbox">
-                                        <div class="w-100 ms-3">
-                                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                                <span>Short task goes here...</span>
-                                                <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center border-bottom py-2">
-                                        <input class="form-check-input m-0" type="checkbox">
-                                        <div class="w-100 ms-3">
-                                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                                <span>Short task goes here...</span>
-                                                <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center border-bottom py-2">
-                                        <input class="form-check-input m-0" type="checkbox" checked>
-                                        <div class="w-100 ms-3">
-                                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                                <span><del>Short task goes here...</del></span>
-                                                <button class="btn btn-sm text-primary"><i
-                                                        class="fa fa-times"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center border-bottom py-2">
-                                        <input class="form-check-input m-0" type="checkbox">
-                                        <div class="w-100 ms-3">
-                                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                                <span>Short task goes here...</span>
-                                                <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center pt-2">
-                                        <input class="form-check-input m-0" type="checkbox">
-                                        <div class="w-100 ms-3">
-                                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                                <span>Short task goes here...</span>
-                                                <button class="btn btn-sm"><i class="fa fa-times"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Widgets End -->
 
 
                     <!-- Footer Start -->
@@ -357,6 +158,135 @@
                 <!-- Back to Top -->
                 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
             </div>
+            
+            
+       <script>
+       /* document.addEventListener('DOMContentLoaded', function() {
+    	    // Read CSS variables
+    	    const rootStyles = getComputedStyle(document.documentElement);
+    	    const primary = rootStyles.getPropertyValue('--primary').trim();
+    	    const secondary = rootStyles.getPropertyValue('--secondary').trim();
+    	    const light = rootStyles.getPropertyValue('--light').trim();
+    	    const dark = rootStyles.getPropertyValue('--dark').trim();
+
+    	    const parsedData = JSON.parse('${chartDataJson}');
+    	    const ctx = document.getElementById('expenseChart').getContext('2d');
+
+    	    new Chart(ctx, {
+    	        type: 'bar',
+    	        data: {
+    	            labels: Object.keys(parsedData),
+    	            datasets: [{
+    	                label: 'Expenses by Category',
+    	                data: Object.values(parsedData),
+    	                backgroundColor: [primary, secondary, light, dark] // mapped from your CSS palette
+    	            }]
+    	        },
+    	        options: {
+    	            responsive: true,
+    	            plugins: {
+    	                legend: {
+    	                    display: true
+    	                }
+    	            }
+    	        }
+    	    });
+    	}); */
+    	
+    	document.addEventListener('DOMContentLoaded', function () {
+
+    	    const rootStyles = getComputedStyle(document.documentElement);
+    	    const primary = rootStyles.getPropertyValue('--primary').trim();
+    	    const light = rootStyles.getPropertyValue('--light').trim();
+
+    	    // ===== Parse Data =====
+    	    const expenseData = JSON.parse('${expenseJson}');
+    	    const incomeData = JSON.parse('${incomeJson}');
+    	    const categoryData = JSON.parse('${categoryJson}');
+
+    	    const months = [
+    	        'Jan','Feb','Mar','Apr','May','Jun',
+    	        'Jul','Aug','Sep','Oct','Nov','Dec'
+    	    ];
+
+    	    // ==========================
+    	    // BAR CHART (Income vs Expense)
+    	    // ==========================
+    	    const barCtx = document.getElementById('barChart').getContext('2d');
+
+    	    new Chart(barCtx, {
+    	        type: 'bar',
+    	        data: {
+    	            labels: months,
+    	            datasets: [
+    	                {
+    	                    label: 'Expense',
+    	                    data: Object.values(expenseData),
+    	                    backgroundColor: primary
+    	                },
+    	                {
+    	                    label: 'Income',
+    	                    data: Object.values(incomeData),
+    	                    backgroundColor: light
+    	                }
+    	            ]
+    	        },
+    	        options: {
+    	            responsive: true,
+    	            plugins: {
+    	                legend: {
+    	                    labels: { color: "#fff" }
+    	                }
+    	            },
+    	            scales: {
+    	                x: {
+    	                    ticks: { color: "#6C7293" }
+    	                },
+    	                y: {
+    	                    ticks: { color: "#6C7293" }
+    	                }
+    	            }
+    	        }
+    	    });
+
+    	    // ==========================
+    	    // LINE CHART (Category Expense)
+    	    // ==========================
+    	    const lineCtx = document.getElementById('lineChart').getContext('2d');
+
+    	    new Chart(lineCtx, {
+    	        type: 'line',
+    	        data: {
+    	            labels: Object.keys(categoryData),
+    	            datasets: [{
+    	                label: 'Expense by Category',
+    	                data: Object.values(categoryData),
+    	                borderColor: primary,
+    	                backgroundColor: primary + "33",
+    	                fill: true,
+    	                tension: 0.4
+    	            }]
+    	        },
+    	        options: {
+    	            responsive: true,
+    	            plugins: {
+    	                legend: {
+    	                    labels: { color: "#fff" }
+    	                }
+    	            },
+    	            scales: {
+    	                x: {
+    	                    ticks: { color: "#6C7293" }
+    	                },
+    	                y: {
+    	                    ticks: { color: "#6C7293" }
+    	                }
+    	            }
+    	        }
+    	    });
+
+    	});
+</script>
         </body>
 
         </html>

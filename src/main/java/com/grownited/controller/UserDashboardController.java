@@ -583,6 +583,21 @@ public class UserDashboardController {
 
         return "redirect:/userIncomeList";
     }
+    
+    @GetMapping("/userDelete Income")
+    public String deleteIncome(Integer incomeId, HttpSession session, Model model) {
+
+        userEntity loggedInUser = (userEntity) session.getAttribute("user");
+        if (loggedInUser == null) return "redirect:/login";
+
+        if (incomeId != null) {
+            incomeRepository.deleteById(incomeId);
+        }
+
+        model.addAttribute("activePage", "income");
+
+        return "redirect:/userIncomeList";
+    }
 
     // ==================== HELPER METHOD ====================
     private <T> List<T> safeList(List<T> list) {

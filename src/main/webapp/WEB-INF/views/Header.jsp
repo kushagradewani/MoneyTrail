@@ -24,6 +24,12 @@
     <!-- CSS -->
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+    
+    <!-- DataTables Core CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/2.3.7/css/dataTables.dataTables.css">
+
+<!-- DataTables Buttons CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.2.6/css/buttons.dataTables.css">
 </head>
 
 <body>
@@ -50,20 +56,20 @@
     <div class="navbar-nav align-items-center ms-auto">
 
         <!-- Messages -->
-        <div class="nav-item dropdown">
+        <!-- <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <i class="fa fa-envelope me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Message</span>
             </a>
-        </div>
+        </div> -->
 
         <!-- Notifications -->
-        <div class="nav-item dropdown">
+        <!-- <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <i class="fa fa-bell me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Notification</span>
             </a>
-        </div>
+        </div> -->
 
         <c:choose>
 

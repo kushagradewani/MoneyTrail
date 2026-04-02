@@ -1,6 +1,7 @@
 package com.grownited.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -30,5 +31,13 @@ public interface IncomeRepository extends JpaRepository<IncomeEntity, Integer> {
 	    Double totalIncomeByUserAndQuarter(@Param("userId") Integer userId,
 	                                       @Param("quarter") int quarter,
 	                                       @Param("year") int year);
+	    
+	    
+	    @Query("SELECT COALESCE(SUM(i.amount),0) FROM IncomeEntity i WHERE MONTH(i.date)=:month")
+	    Integer getTotalIncomeByMonth(@Param("month") int month);
+	    
+	    @Query("SELECT SUM(i.amount) FROM IncomeEntity i WHERE i.inaccountId = :inaccountId")
+	    Optional<Double> sumByAccount(@Param("inaccountId") Integer inaccountId);
+	
 	    
 }

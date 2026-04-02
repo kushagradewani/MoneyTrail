@@ -36,4 +36,18 @@ public interface ExpenseRepository extends JpaRepository<ExpenseEntity, Integer>
                                         @Param("quarter") int quarter,
                                         @Param("year") int year);
 
+    
+    @Query("SELECT COALESCE(SUM(e.amount),0) FROM ExpenseEntity e WHERE MONTH(e.date)=:month")
+    Integer getTotalExpenseByMonth(@Param("month") int month);
+
+    @Query("SELECT COALESCE(SUM(e.amount),0) FROM ExpenseEntity e WHERE e.categoryId=:catId")
+    Integer getTotalExpenseByCategory(@Param("catId") int catId);
+    
+    @Query("SELECT e FROM ExpenseEntity e WHERE e.userId = :userId") // or adjust field
+    List<ExpenseEntity> getUserExpenses(@Param("userId") Integer userId);
+    
+    
+    @Query("SELECT SUM(e.amount) FROM ExpenseEntity e WHERE e.inaccountId = :inaccountId")
+    Optional<Double> sumByAccount(@Param("inaccountId") Integer inaccountId);
+    
 }

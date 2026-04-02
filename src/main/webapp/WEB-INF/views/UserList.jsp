@@ -97,7 +97,7 @@
 					</div>
 
 					<div class="table-responsive">
-						<table class="table table-bordered table-striped text-white">
+						<table id="first" class="table table-bordered table-striped text-white">
 							<thead>
 								<tr>
 									<th scope="col">#</th>
@@ -106,6 +106,7 @@
 									<th scope="col">Email</th>
 									<th scope="col">Status</th>
 									<th scope="col">Action</th>
+									<th scope="col">View</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -165,5 +166,15 @@
 	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 		class="bi bi-arrow-up"></i></a>
 </body>
+
+<script>
+new DataTable('#first', {
+    layout: {
+        topStart: {
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        }
+    }
+});
+	</script>
 
 </html>
