@@ -1,2 +1,14 @@
+# Maven wrapper
+.mvn/
+mvnw
+
+# IDE settings
+.settings/
+.project
+
+# Build folder
 target/
-*.class
+
+# Documentation files
+HELP.md
+readme.md

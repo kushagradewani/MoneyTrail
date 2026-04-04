@@ -35,11 +35,12 @@ public class UserService {
 
             userRepository.save(user);
             
-            if ("ADMIN".equalsIgnoreCase(user.getRole())) {
+            if (user.getRole().equals("ADMIN")) {
     	        mailService.sendAdminResetOtpMail(user,otp);
     	    } else {
     	        mailService.sendUserResetOtpMail(user,otp);
     	    }
+            
         }
     }
 

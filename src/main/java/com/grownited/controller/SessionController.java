@@ -312,7 +312,7 @@ public class SessionController {
 
             userRepository.save(user);
 
-            if ("ADMIN".equalsIgnoreCase(user.getRole())) {
+            if (user.getRole().equals("ADMIN")) {
     	        mailService.sendAdminPasswordSuccessMail(user);
     	    } else {
     	        mailService.sendUserPasswordSuccessMail(user);

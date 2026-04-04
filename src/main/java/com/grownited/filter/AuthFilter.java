@@ -37,7 +37,7 @@ public class AuthFilter implements Filter {
 		publicUrl.add("/forgetpassword");
 		publicUrl.add("/authenticate");
 
-		if (publicUrl.contains(uri) || uri.contains("/css") || uri.contains("/img") || uri.contains("/js") || uri.contains("/lib") || uri.contains("/scss") || uri.contains("/api")) {
+		if (publicUrl.contains(uri) || uri.contains("/css") || uri.contains("/img") || uri.contains("/js") || uri.contains("/lib") || uri.contains("/scss") || uri.contains("/api") || uri.contains("/register") || uri.contains("/changePassword")) {
 			// go ahead
 			chain.doFilter(request, response);
 		} else {
